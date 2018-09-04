@@ -1,0 +1,130 @@
+\section{Mathematical Preliminaries and Error Analysis}
+\subsection{Round-off Errors and Computer Arithmetic}
+\subsubsection{Binary machine numbers}
+\begin{defn}{舍入误差}
+舍入误差形成原因：进行有限位的运算（finite digits arithmetic）\par
+其中，IEEE:754-2008规定二进制机器数（Binary machine numbers）中浮点数（floating-point）存储规范如下：
+    \begin{align*}
+    (-1)^S2^{c-1023}(1+f) \\
+    \begin{cases}
+        S:\, 0/1 & sign part \\
+        c:\, 11\,digits & \text{exponential part.} \\
+        f:\, 52\,digits & \text{mantissa part} \\
+    \end{cases}
+    % \square\square\cdots\square
+    \end{align*}
+\end{defn}\par
+由于实数的稠密性，可知找不到比某一个数大的最小的数或小的最大的数，但是在计算机中可以找到，所以计算机不能表示所有的数。
+
+\subsubsection{Decimal machine numbers}
+$\pm 0.d_1d_2\cdots d_n \times 10^n$其中$1\leq d_1\leq 9$，$0\leq d_i\leq 9$，$\forall i\geq 2$。如果记真实的数为$y$，其浮点数表示为$fl(y)$。\par
+当存在$y=0.d_1d_2\cdots d_kd_{k+1}\cdots\times 10^n$，其浮点数表示有如下两种方式：
+\begin{enumerate}
+    \item Chopping: chop off digits， say $d_{k+1}d_{k+2}\cdots$.
+    \item Rounding: $y+5\time 10^{n-(k+1)}$, then chopping.
+\end{enumerate}
+\begin{example}
+$\pi=3.14159265\cdots$，取5位。\par
+    \begin{itemize}
+      \item Chopping: $fl(y)=0.31415\times 10^1$.
+      \item Rounding: $fl(y)=0.31416\times 10^1$.
+    \end{itemize}
+\end{example}\par
+\begin{defn}{ }
+Suppose $p^\star$ is an approximation of p.
+\begin{align*}
+    \begin{cases}
+        absolute\,error\,&=\,\left|p^\star-p\right| \\
+        relative\,error\,&=\,\frac{\left|p^\star-p\right|}{p} \\
+    \end{cases}
+\end{align*}
+\end{defn}
+
+\begin{defn}{有效数字（Significant digits）}
+$p^\star$ is said to approximate p with \emph{t} significant digits. If t is the \emph{largest nonnegative} integer, s.t. $$\frac{\left|p-p^\star\right|}{p}\leq 5\times 10^{-t}$$.
+\end{defn}\par
+Chopping floating:\par
+$$y=0.d_1\cdots d_kd_{k+1}\cdots\times 10^n$$
+$$fl(y) = 0.d_1\cdots d_k\times 10^n$$\par
+Chopping:（其有效位数至少为k-1）
+$$
+\frac{\left|fl(y)-y\right|}{\left|y\right|} = \frac{0.0\cdots 0d_{k+1}\cdots\times 10^n}{0.d_1\cdots d_kd_{k+1}\cdots\times 10^n} \leq 10^{1-k}
+$$\par
+Rounding:（其有效位数至少为k）
+$$
+\frac{\left|fl(y)-y\right|}{\left|y\right|} \leq \frac{0.0\cdots 1d_{k+1}\cdots\times 10^n}{0.d_1\cdots d_kd_{k+1}\cdots\times 10^n} \leq 10^{-k}
+$$
+
+\subsubsection{Machine Operators}
+记计算机的加减乘除为$\oplus\ominus\otimes\oslash$，于是有
+$$x\op y\,=\,fl(fl(x)\op fl(y))$$\par
+Four cases to avoid:
+\begin{enumerate}
+    \item 两个十分接近的数（two nearly equal）。
+    \item 分子远大于分母（numerator >> denominator）。
+    \item 避免大数吃掉小数。
+\end{enumerate}
+
+\subsubsection{Nested method（秦九韶算法）}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{$a_0,a_1,\cdots,a_n(given)$; $x$}
+\Output{$P_n(x)$}
+\BlankLine
+    $S_n\leftarrow a_n$\;
+    \For{$k\leftarrow n-2$ \KwTo $0$}{
+        $S_k\leftarrow xS_{k+1}+a_k$\;
+    }
+    $P_n(x)\leftarrow S_0$\;
+\end{algorithm}
+\begin{python}
+def nested(poly:list=[1], x:float=0.0)->float:
+    """
+    Horner nested polynomial calculation.
+
+    Args:
+        poly: List, store the coefficient of the polynomial.
+        x: Float, specify the variable in the polynomial.
+
+    Returns:
+        Float, result.
+
+    Raises:
+        If `poly' is empty, raise IndexError.
+        If type(args) does not correspond, raise TypeError.
+    """
+    result = poly[0]
+    for i in range(1, poly.__len__()):
+        result = x*result + poly[i]
+    return result
+\end{python}
+
+\subsubsection{Convergence（收敛性）}
+Stable: small change in initial data and the error is small.\par
+若$E_0$为初始值误差，$E_n$为$n$步的误差，
+\begin{itemize}
+    \item $E_n\thickapprox C$（不依赖$n$），称之为线性。
+    \item $E_n\thickapprox C^nE_0$则可由$C$的取值判断是否稳定。
+\end{itemize}
+\begin{defn}{Rates of Convergence}
+当$n\rightarrow\infty$，$\alpha_n\rightarrow\alpha$，$\beta_n\rightarrow 0$（与$n$的取值无关），则称$\alpha_n$是以$\beta_n$的速度收敛到$\alpha$的。
+\end{defn}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

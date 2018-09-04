@@ -1,0 +1,19 @@
+\usepackage{fancyhdr}
+\usepackage{tikzpagenodes}
+\usetikzlibrary{shapes.geometric}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand\headrulewidth{0pt}
+\fancyhead[OC]{\begin{tikzpicture}[remember picture,overlay]
+\node[diamond,draw,font=\small\itshape] at (current page header area.south west) (dia) {\thepage};
+\draw (dia.3) -- (current page header area.south east|-dia.3);
+\draw (dia.357) -- ([xshift=-7pt]current page header area.south east|-dia.357);
+\end{tikzpicture}}
+\fancyhead[EC]{\begin{tikzpicture}[remember picture,overlay]
+\node[diamond,draw,font=\small\itshape] at (current page header area.south east) (dia) {\thepage};
+\draw (dia.177) -- (current page header area.south west|-dia.177);
+\draw (dia.183) -- ([xshift=7pt]current page header area.south west|-dia.183);
+\end{tikzpicture}}
+\fancyhead[OR]{\small\nouppercase\leftmark}
+\fancyhead[EL]{\small\nouppercase\rightmark}

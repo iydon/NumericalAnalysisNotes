@@ -1,0 +1,120 @@
+\usepackage{hdr}
+\usepackage{amsmath,ntheorem,amssymb,xfrac,listings,xcolor,enumerate}
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{shadows}
+% \usepackage{showkeys}
+\newmdtheoremenv[%
+    outerlinewidth  = 2,%
+    roundcorner     = 10pt,%
+    backgroundcolor = yellow!40,%
+    outerlinecolor  = blue!70!black,%
+    innertopmargin  = \topskip,%
+    splittopskip    = \topskip,%
+    ntheorem        = true,%
+    ]{defn}{定义}[section]
+\newmdtheoremenv[%
+    outerlinewidth  = 1,%
+    roundcorner     = 10pt,%
+    backgroundcolor = green!40,%
+    outerlinecolor  = blue!70!black,%
+    innertopmargin  = \topskip,%
+    splittopskip    = \topskip,%
+    ntheorem        = true,%
+    ]{theo}{定理}[section]
+% proof
+\newenvironment{proof}{{\heiti 【证明】\quad}}{\hfill$\square$}
+% equation label
+% \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\numberwithin{equation}{section}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+% section depth
+% \setcounter{tocdepth}{2}
+% MATLAB
+\usepackage{minted}
+\newenvironment{matlab}
+    {\VerbatimEnvironment\begin{minted}
+        [mathescape, linenos, numbersep=5pt,
+        gobble=2, %Remove the first n characters from each input line.
+        frame=lines, escapeinside=||,
+        frame=single, xleftmargin=0em, xrightmargin=0em]{matlab}}
+    {\end{minted}}
+% Python
+\newenvironment{python}
+    {\VerbatimEnvironment\begin{minted}
+        [mathescape, linenos, numbersep=5pt,
+        gobble=2, %Remove the first n characters from each input line.
+        frame=lines, escapeinside=||,
+        frame=single, xleftmargin=0em, xrightmargin=0em]{python}}
+    {\end{minted}}
+% command line
+\usetikzlibrary{calc}
+\definecolor{DarkBlue}{rgb}{.11,.23,.60}
+\mdfdefinestyle{commandline}%
+{leftmargin=5pt, rightmargin=10pt,innerleftmargin=15pt,
+	middlelinecolor=DarkBlue,
+	middlelinewidth=2pt,
+	frametitlerule=false,
+	backgroundcolor=white,%black!10!white,
+    roundcorner=3pt,
+	frametitle={Command Window},
+	frametitlefont={\normalfont\sffamily\color{white}\hspace{-1em}},
+	frametitlebackgroundcolor=DarkBlue,
+	singleextra={\draw[black!10,line width=12pt]
+		($(O)+(7pt,1pt)$) -- ($(O|-P)+(7pt,-\mdfframetitleboxtotalheight)-(0,1pt)$);
+		\node[inner sep=0pt,color=black]at ($(O|-P)+(7pt,-25pt)$)%
+		{$\scriptstyle f\!x$}; },
+	nobreak,
+}
+\lstnewenvironment{script} {%
+	\lstset{language=Matlab,basicstyle=\tiny\ttfamily,breaklines=true,%
+		escapeinside = ``,tabsize=2,
+        showstringspaces=falsei，
+		aboveskip=0pt,belowskip=0pt}}{}
+\surroundwithmdframed[style=commandline]{script}
+% example
+\usepackage{environ}
+\usepackage{xparse}
+\usetikzlibrary{shapes,decorations}
+\definecolor{seco}{RGB}{0,145,215}
+\newcommand{\newfancytheoremstyle}[5]{%
+    \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle, rounded corners, inner sep=10pt, inner ysep=20pt}}
+    \tikzset{#1title/.style={fill=#3, text=#2}}
+    \expandafter\def\csname #1headstyle\endcsname{#4}
+    \expandafter\def\csname #1bodystyle\endcsname{#5}
+}
+\newfancytheoremstyle{fancythrm}{white!10}{seco}{\bfseries\sffamily}{\sffamily}
+\makeatletter
+\DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{%
+    % define the counter for the theorem
+    \ifx#1\@empty
+        \newcounter{#2}
+    \else
+        \newcounter{#2}[#1]
+        \numberwithin{#2}{#1}
+    \fi
+    %% define the "newthem" environment
+    \NewEnviron{#2}[1][{}]{%
+        \noindent\centering
+        \begin{tikzpicture}
+            \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                    \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+            \node[#5title, rounded corners, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+            \node[#5title, rounded corners] at (box.east) {#4};
+        \end{tikzpicture}
+    }[\par\vspace{.5\baselineskip}]
+}
+% XYPIC
+\usepackage[all]{xypic}
+\makeatother
+\newfancytheorem[section]{example}{例}{$\pi$}
+% Algorithmic
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+% information
+\title{Numerical Analysis}
+\author{Iydon}
+\date{\today} 
