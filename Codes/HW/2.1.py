@@ -26,7 +26,7 @@ def Bisection(fun, a:float, b:float, max_step:int=32, sign_dig:int=6) -> float:
 
     Returns:
         Tuple: (Step, zero).
-        zero | fun(zero)\sim 0.
+        zero | fun(zero)\\sim 0.
 
     Raises:
         None.
@@ -53,10 +53,10 @@ def Theorem_2_1():
     """
     Theorem 2.1.
     """
-    string = "Suppose that $f\in C[a,b]$ and $f(a)\dot{}f(b)<0$. The Bisection method " +\
-             "generates a sequence $\{p_n\}_{n=1}^{\infty}$ approximating a zero $p$ " +\
+    string = "Suppose that $f\\in C[a,b]$ and $f(a)\\dot{}f(b)<0$. The Bisection method " +\
+             "generates a sequence $\\{p_n\\}_{n=1}^{\\infty}$ approximating a zero $p$ " +\
              "of $f$ with" +\
-             "\[\left|p_n-p\right|\leq\frac{b-a}{2^n},\quad when\quad n\geq 1.\]"
+             "\\[\\left|p_n-p\\right|\\leq\\frac{b-a}{2^n},\\quad when\\quad n\\geq 1.\\]"
     return string
 
 title = """
@@ -123,20 +123,20 @@ title = """
 """
 print(title)
 proof = """
-\[f(p_n)=n^{-10}<10^{-3}\Rightarrow n>\sqrt[10]{100}=1.585\]
-\[\left|1-(1+\frac{1}{n})\right|<10^{-3}\Rightarrow n>10^3\]
+\\[f(p_n)=n^{-10}<10^{-3}\\Rightarrow n>\\sqrt[10]{100}=1.585\\]
+\\[\\left|1-(1+\\frac{1}{n})\\right|<10^{-3}\\Rightarrow n>10^3\\]
 """.replace("\n", "\n    ")
 print(proof)
 
 title = """
-17. Let {p_n} be the sequence defined by p_n=\sum_{k=1}^{n}\frac{1}{k}. Show that {p_n} diverges even though \lim_{n\rightarrow\infty}(p_n-p_{n-1})=0.
+17. Let {p_n} be the sequence defined by p_n=\\sum_{k=1}^{n}\\frac{1}{k}. Show that {p_n} diverges even though \\lim_{n\\rightarrow\\infty}(p_n-p_{n-1})=0.
 """
 print(title)
 proof = """
-\begin{align*}
-& 1+\frac{1}{2}+\underbrace{\frac{1}{3}+\frac{1}{4}}+\ldots+\underbrace{\frac{1}{2^k+1}+\ldots+\frac{1}{2^{k+1}}}+\ldots \\
->& 1+\frac{1}{2}+\underbrace{\frac{1}{4}+\frac{1}{4}}+\ldots+\underbrace{\frac{1}{2^{k+1}}+\ldots+\frac{1}{2^{k+1}}}+\ldots \\
-=& 1+\frac{1}{2}+\frac{1}{2}+\ldots+\frac{1}{2}+\ldots
-\end{align*}
+\\begin{align*}
+& 1+\\frac{1}{2}+\\underbrace{\\frac{1}{3}+\\frac{1}{4}}+\\ldots+\\underbrace{\\frac{1}{2^k+1}+\\ldots+\\frac{1}{2^{k+1}}}+\\ldots \\\\
+>& 1+\\frac{1}{2}+\\underbrace{\\frac{1}{4}+\\frac{1}{4}}+\\ldots+\\underbrace{\\frac{1}{2^{k+1}}+\\ldots+\\frac{1}{2^{k+1}}}+\\ldots \\\\
+=& 1+\\frac{1}{2}+\\frac{1}{2}+\\ldots+\\frac{1}{2}+\\ldots
+\\end{align*}
 """.replace("\n", "\n    ")
 print(proof)
