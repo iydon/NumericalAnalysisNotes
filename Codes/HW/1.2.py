@@ -11,7 +11,7 @@ def error(p:float, p_star:float) -> tuple:
     """
     Compute the absolute error and
     relative error in approximations
-    of p by p^\\star.
+    of p by p^\star.
     ----------------------------
 
     Args:
@@ -29,7 +29,7 @@ def error(p:float, p_star:float) -> tuple:
 
 def largest_interval_with_relative_error(p:float, error:float=1e-5, eps=1e-6) -> tuple:
     """
-    Find the largest interval in which p^\\star
+    Find the largest interval in which p^\star
     must lie to approximate p with relative error
     at most `error' for each value of p.
     ----------------------------
@@ -166,7 +166,7 @@ class Rational:
         """
         str(self)
         """
-        return "\\frac{%s}{%s}"%(self.num, self.den)
+        return "\frac{%s}{%s}"%(self.num, self.den)
 
     # ------------- OPERATOR -------------
     def __abs__(self):
@@ -445,12 +445,12 @@ class Rational:
 
 # ------------- Homework -------------
 title = """
-1. Compute the absolute error and relative error in approximations of p by p^\\star.
+1. Compute the absolute error and relative error in approximations of p by p^\star.
 """
 print(title)
     # a
 result = error(np.pi, 22/7)
-print("    a) \\pi and 22/7:    ",result)
+print("    a) \pi and 22/7:    ",result)
     # c
 result = error(np.e, 2.718)
 print("    c) e and 2.718:     ", result)
@@ -462,16 +462,16 @@ result = error(8*7*6*5*4*3*2*1, 39900)
 print("    g) 8! and 39900:    ", result)
 
 title = """
-2. Find the largest interval in which p^\\star must lie to approximate p with relative error at most 1e-4 for
+2. Find the largest interval in which p^\star must lie to approximate p with relative error at most 1e-4 for
    each value of p.
 """
 print(title)
     # a
 result = largest_interval_with_relative_error(np.pi, 1e-4)
-print("    a) The largest interval of \\pi:     ", result)
+print("    a) The largest interval of \pi:     ", result)
     # c
 result = largest_interval_with_relative_error(np.sqrt(2), 1e-4)
-print("    c) The largest interval of \\sqrt(2):", result)
+print("    c) The largest interval of \sqrt(2):", result)
 
 title = """
 4. Perform the following computations (i) exactly, (ii) using three-digit chopping arithmetic, and (iii)
@@ -518,21 +518,21 @@ print("    a) Solution of linear system:", solution)
 
 title = """
 24. Suppose that fl(y) is a k-digit rounding approximation to y. Show that
-    \\left|\\frac{y-fl(y)}{y}\\right| \\leq 0.5\\times 10^{-k+1}.
+    \left|\frac{y-fl(y)}{y}\right| \leq 0.5\times 10^{-k+1}.
 """
 print(title)
 proof = """
-If $d_{k+1}<5$, then $fl(y)=0.d_1d_2\\ldots d_k\\times 10^n$.
-\\begin{align*}
-\\left|\\frac{y-fl(y)}{y}\\right| &= \\left|\\frac{d_{k+1}.d_{k+2}\\ldots\\times 10^{n-k+1}}{0.d_1d_2\\ldots\\times 10^n}\\right| \\\\
-&= \\frac{d_{k+1}.d_{k+2}\\ldots}{0.d_1d_2\\ldots}\\times 10^{-k+1} \\\\
-&\\leq 0.5\\times 10^{-k+1}
-\\end{align*}
-If $d_{k+1}\\geq 5$, then $fl(y)=0.d_1d_2\\ldots d_k\\times 10^n+10^{n-k}$.
-\\begin{align*}
-\\left|\\frac{y-fl(y)}{y}\\right| &= \\left|\\frac{1-0.d_{k+1}d_{k+2}\\ldots\\times 10^{n-k}}{0.d_1d_2\\ldots\\times 10^n}\\right| \\\\
-&= \\frac{1-0.d_{k+1}d_{k+2}\\ldots}{0.d_1d_2\\ldots}\\times 10^{-k} \\\\
-&\\leq 0.5\\times 10^{-k+1}
-\\end{align*}
-"""
+If $d_{k+1}<5$, then $fl(y)=0.d_1d_2\ldots d_k\times 10^n$.
+\begin{align*}
+\left|\frac{y-fl(y)}{y}\right| &= \left|\frac{d_{k+1}.d_{k+2}\ldots\times 10^{n-k+1}}{0.d_1d_2\ldots\times 10^n}\right| \\
+&= \frac{d_{k+1}.d_{k+2}\ldots}{0.d_1d_2\ldots}\times 10^{-k+1} \\
+&\leq 0.5\times 10^{-k+1}
+\end{align*}
+If $d_{k+1}\geq 5$, then $fl(y)=0.d_1d_2\ldots d_k\times 10^n+10^{n-k}$.
+\begin{align*}
+\left|\frac{y-fl(y)}{y}\right| &= \left|\frac{1-0.d_{k+1}d_{k+2}\ldots\times 10^{n-k}}{0.d_1d_2\ldots\times 10^n}\right| \\
+&= \frac{1-0.d_{k+1}d_{k+2}\ldots}{0.d_1d_2\ldots}\times 10^{-k} \\
+&\leq 0.5\times 10^{-k+1}
+\end{align*}
+""".replace("\n", "\n    ")
 print(proof)
