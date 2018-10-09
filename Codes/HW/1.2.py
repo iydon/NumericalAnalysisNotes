@@ -45,10 +45,10 @@ def largest_interval_with_relative_error(p:float, error:float=1e-5, eps=1e-6) ->
     Raises:
         None.
     """
-    δ = error*p
+    delta = error*p
     chopping = lambda x: eps * int(x/eps)
-    interval_left  = chopping(p-δ+eps)
-    interval_right = chopping(p+δ)
+    interval_left  = chopping(p-delta+eps)
+    interval_right = chopping(p+delta)
     return (interval_left, interval_right)
 
 def chopping(p:float, sign_dig:int=6) -> float:
@@ -524,15 +524,17 @@ print(title)
 proof = """
 If $d_{k+1}<5$, then $fl(y)=0.d_1d_2\\ldots d_k\\times 10^n$.
 \\begin{align*}
-\\left|\\frac{y-fl(y)}{y}\\right| &= \\left|\\frac{d_{k+1}.d_{k+2}\\ldots\\times 10^{n-k+1}}{0.d_1d_2\\ldots\\times 10^n}\\right| \\\\
-&= \\frac{d_{k+1}.d_{k+2}\\ldots}{0.d_1d_2\\ldots}\\times 10^{-k+1} \\\\
+\\left|\\frac{y-fl(y)}{y}\\right| &= \\left|\\frac{d_{k+1}.d_{k+2}\\ldots\\times 10^{n-k-1}}{0.d_1d_2\\ldots\\times 10^n}\\right| \\\\
+&= \\frac{d_{k+1}.d_{k+2}\\ldots}{0.d_1d_2\\ldots}\\times 10^{-k-1} \\\\
 &\\leq 0.5\\times 10^{-k+1}
 \\end{align*}
 If $d_{k+1}\\geq 5$, then $fl(y)=0.d_1d_2\\ldots d_k\\times 10^n+10^{n-k}$.
 \\begin{align*}
-\\left|\\frac{y-fl(y)}{y}\\right| &= \\left|\\frac{1-0.d_{k+1}d_{k+2}\\ldots\\times 10^{n-k}}{0.d_1d_2\\ldots\\times 10^n}\\right| \\\\
-&= \\frac{1-0.d_{k+1}d_{k+2}\\ldots}{0.d_1d_2\\ldots}\\times 10^{-k} \\\\
+\\left|\\frac{y-fl(y)}{y}\\right| &= \\left|\\frac{(1-0.d_{k+1}d_{k+2}\\ldots)\\times 10^{n-k-1}}{0.d_1d_2\\ldots\\times 10^n}\\right| \\\\
+&= \\frac{1-0.d_{k+1}d_{k+2}\\ldots}{0.d_1d_2\\ldots}\\times 10^{-k-1} \\\\
 &\\leq 0.5\\times 10^{-k+1}
 \\end{align*}
 """.replace("\n", "\n    ")
 print(proof)
+
+

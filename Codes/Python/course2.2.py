@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time     : 2018/09/13 14:25
 # @Author   : Iydon
-# @File     : 3.py
+# @File     : course2.2.py
 import numpy as np
 import time, random, threading
 

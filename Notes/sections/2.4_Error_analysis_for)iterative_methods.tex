@@ -1,0 +1,61 @@
+\section{Error Analysis for Iterative Methods}
+
+\begin{defn}{Order of Convergence}
+$\{p_n\}_{n=0}^\infty$ 是一个收敛到$p$的序列，但是对于所有的$n$都有$p_n\neq p$，如果存在正数$\lambda\,,\alpha$满足以下条件：
+\[
+\lim_{n\rightarrow\infty}\frac{\abs{p_{n+1}-p}}{\abs{p_n-p}^\alpha}\,=\,\lambda\,,
+\]
+then $\{p_n\}_{n=0}^\infty$ converges to p of order $\alpha$, with asymptotic error constant $\lambda$.
+\end{defn}
+
+如果$\alpha\,=\,1(and \lambda <1)$，则称序列为线性收敛（\emph{linearly convergent}）。\par
+如果$\alpha\,=\,2$，则序列为二次收敛（\emph{quadratically convergent}）。
+
+线性收敛：$\abs{p_n-0}\approx(0.5)^n\abs{p_0}$。\par
+二次收敛：$\abs{\tilde{p}_n-0}\approx(0.5)^{2^n-1}\abs{\tilde{p}_0}$。\par
+\begin{theo}
+Let $g\in C[a,b]$ be such that $g(x)\in [a,b]$, for all $x\in [a,b]$. Suppose that $g'$ is continuous on $(a,b)$ and a positive constant $k<1$ exists with
+\[
+\abs{g'(x)}\leq k,\quad for\,all\,x\in (a,b).
+\]
+If $g'(p)\neq 0$, then for any number $p_0\neq p$ in $[a,b]$, the sequence
+\[
+p_n\,=\,g(p_{n-1}),\quad for\,n\geq 1,
+\]
+converges only linearly to the unique fixed point $p$ in $[a,b]$.
+\end{theo}
+\begin{proof}
+\begin{align*}
+    & p_{n+1}-p=g(p_n)-g(p)=g'(\xi_n)(p_n-p), \\
+    \Rightarrow & \lim_{n\rightarrow\infty}\frac{p_{n+1}-p}{p_n-p}=\lim_{n\rightarrow\infty}g'(\xi_n)=g'(p)
+\end{align*}
+$\Rightarrow$ If $g'(p)\neq 0$, fixed-point iteration exhibits linear convergence with \\asymptotic error constant $\abs{g'(p)}$.
+\end{proof}
+
+\begin{theo}
+Let $p$ be a solution of the equation $x=g(x)$. Suppose that $g'(p)=0$ and $g''$ is continuous with $\abs{g''(x)}<M$ on an open interval $I$ containing $p$. Then there exists a $\delta>0$ such that, for $p_0]=\in [p-\delta,p+\delta]$, the sequence defined by $p_n\,=\,g(p_{n-1})$, when $n\geq 1$, converges at least quadratically to $p$. Moreover, for sufficiently large values of $n$,
+\[
+\abs{p_{n+1}-p}\,<\,\frac{M}{2}\abs{p_n-p}^2.
+\]
+\end{theo}
+\begin{proof}
+\begin{align*}
+& g(x)=g(p)+g'(p)(x-p)+\frac{g''(\xi)}{2}(x-p)^2,
+\end{align*}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

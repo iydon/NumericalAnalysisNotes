@@ -1,0 +1,180 @@
+\section{Root-finding problem}
+\subsection{The Bisection Method}
+\begin{theo}{Intermediate Value Theorem}
+$f \in [a,b]$，$\forall k \in f([a,b])$，$\exists c\in [a,b]$，$s.t.\,f(c)=k$。
+\end{theo}
+\begin{python}
+def Bisection(fun, a:float, b:float, max_step:int=128, ...
+    eps:float=1e-6)->float:
+    mid_last = a
+    if fun(a)*fun(b) < 0:
+        for i in range(0, max_step):
+            mid = (a+b) / 2
+            if abs(mid-mid_last)<eps or abs(fun(mid))<eps:
+                print("Step: %d\nZero: %fc"%(i, mid))
+                return mid
+            else:
+                if fun(mid)*fun(a)<0:
+                    b = mid
+                else:
+                    a = mid
+            mid_last = mid
+        print('Bisection cannot be convergent within..
+               the pre-set steps.')
+\end{python}
+\begin{theo}{}
+$f\in C[a,b](continuous)$，根据如上算法，$P_i$为mid的序列。如果$\exists$ root P$\in[a,b]$，则有$\left|P_n-P\right|\leq\frac{b-a}{x^n}$。
+\end{theo}
+\begin{proof}
+$\left|b_n-a_n\right|=\frac{b-a}{2^{n-1}}$，
+\[
+\left|P_n-P\right|\leq\frac{1}{2}(b_n-a_n)\,=\,\frac{b-a}{2^n}
+\]
+于是$P_n = P + o(2_{-n})$。
+\end{proof}
+
+\subsection{Fixed-Point Iteration}
+\begin{defn}{Fixed-point Iteration}
+对g(P)，如果$\forall x\in [a,b]$，如果$\exists$ P $s.t.$ g(P)=P，则称$P$为不动点（fixed point）。\\
+如果$g(x)\in C[a,b]$并且$g([a,b])\subset[a,b]$，there exists at least one p$\in[a,b]$，$s.t.$ g(p)=p。
+\end{defn}
+\begin{theo}{不动点迭代根的存在唯一性定理}
+$g(x)\in C[a,b]$，$g([a,b])\subset[a,b]$。$\forall x\in [a,b]$，都有$g'(x)\leq\kappa<1$。
+\end{theo}
+\begin{proof}\\
+    存在性：
+    \begin{equation*}
+        \begin{cases}
+          h(a) =&g(a)-a \geq 0 \\
+          h(b) =&g(b)-b \leq 0
+        \end{cases}
+    \end{equation*}\par
+    于是有$h(a)h(b)\leq 0$，则$\exists$ p，$s.t.$ h(p)=0。\\
+    唯一性：\par
+    假设存在两个根$P_1$，$P_2$，使得$P_1=g(P_1)$，$P_2=g(P_2)$，但是$P_1\neq P_2$。
+    \begin{align*}
+        \left|g(P_1)-g(P_2)\right| &= \left|g'(\xi)\right|\left| P_1-P_2|\right|,\quad \xi\in [P_1,P_2]. \\
+        &\leq \kappa\left|P_1-P_2\right|, contradiction.
+    \end{align*}
+\end{proof}
+\begin{theo}{不动点收敛的充分条件}\label{theo:fixed_point}
+g$\in$C[a,b]，$g([a,b])\subset[a,b]$，$g'(x)$存在，并且$\left|g'(x)\right|\leq\kappa <1$。$\forall P_0\in[a,b]$，定义序列$P_i=g(P_{i-1}),\quad i=1,2,\cdots$，则$\lim_{n\rightarrow\infty}P_n=P$（P为不动点）。
+\end{theo}
+\begin{proof}
+    \begin{align*}
+        \abs{P_n-P} &= \abs{g(P_{n-1}-g(P))} \\
+        &= \abs{g'(\xi_{n-1})}\abs{P_{n-1}-P} \\
+        &\leq \kappa\abs{P_{n-1}-P} \\
+        &\leq \cdots \leq \cdots \\
+        &\leq \kappa^n\abs{P_0-P} \rightarrow 0.
+    \end{align*}
+\end{proof}\par
+其中，寻找不动点的代码如下：
+\begin{python}
+def fixed_point(fun, start:float=0, max_step:int=128, ...
+    eps:float=1e-6)->float:
+    new_val = fun(start)
+    for i in range(0, max_step):
+        old_val = new_val
+        new_val = fun(old_val)
+        if -eps<old_val-new_val<eps:
+            print(i)
+            return new_val
+\end{python}
+\begin{theo}{}
+如果满足定理\ref{theo:fixed_point}，则$p_n$接近$p$的误差可以表示为
+\[\left|P_n-P\right|\leq \kappa^n\max\{P_0-a,b-P_0\}\]
+并且有
+\begin{align*}
+    \left|P_n-P\right| &= \left|P_n-P_{n+1}+P_{n+2}-P_{n+3}+\ldots\right| \\
+    &\leq \left|P_n-P_{n+1}\right|+\left|P_{n+2}-P_{n+3}\right|+\ldots \\
+    &=\kappa^n\left(1+\kappa+\kappa^2+\ldots\right)\left|P_0-P_1\right| \\
+    &= \frac{\kappa^n}{1-\kappa}\left|P_0-P_q\right|
+\end{align*}
+\end{theo}
+
+\subsection{Newton's Method and Its Extensions}
+Suppose that $f\in C^2[a,b]$. $p_0\in [a,b]$ and $f'(p_0)\neq 0$ and $\left|p-p_0\right|$ is small.
+\[
+0 = f(p) = f(p_0)+(p-p_0)f'(p_0)+\frac{(p-p_0)^2}{2}f''(\xi(p)),
+\]
+$\left|p-p_0\right|$ is small, the term involving $(p-p_0)^2$ is much smaller, then we will get
+\[
+p \sim p_0 - \frac{f(p_0)}{f'(p_0)}\equiv p_1.
+\]
+This sets the stage for Newton's method. which starts with an initial approximation $p_0$ and generates the sequence $\{p_n\}_{n=0}^{\infty}$,
+\[
+p_n = p_{n-1} - \frac{f(p_{n-1})}{f'(p_{n-1})},\quad for\, n\geq 1.
+\]
+\begin{python}
+def Newton_method(f, df, start:float=0.0, max_step:int=32,...
+    sign_dig:int=6)->float:
+    fun = lambda x: x - f(x)/df(x)
+    return fixed_point(fun, start, max_step, sign_dig)
+
+def fixed_point(fun, start:float, max_step:int,...
+    sign_dig:int)->float:
+    fl = lambda x: round(x, 100)
+    eps = 10**(-sign_dig)
+    new_val = fun(start)
+    for i in range(0, max_step):
+        old_val = fl(new_val)
+        new_val = fl(fun(old_val))
+        if abs(old_val-new_val)<=2*eps:
+            return (i, new_val)
+    return "Max_step..."
+\end{python}
+\begin{theo}{牛顿法的收敛性}
+Let $f\in C^2[a,b]$. If $p\in (a,b)$ is such that $f(p)=0$ and $f'(p)\neq 0$, then there exists a $\delta>0$ such that Newton's method generates a sequence $\{p_n\}_{n=0}^{\infty}$ converging to $p$ for any initial approximation $p_0\in [p-\delta,p+\delta]$.
+\end{theo}
+\begin{proof}
+证明基于将牛顿迭代法看作 functional iteration scheme $p_n=g(p_{n-1})$，既然$f'(p)\neq 0$，则$\exists\delta_1>0$使得$f'(x)\neq 0$对于所有的$x\in [p-\delta_1,p+\delta_1]$，于是有$g(x)=x-\frac{f(x)}{f'(x)}$。求导后有
+\[
+g'(x)=1-\frac{f'(x)f'(x)-f(x)f''(x)}{[f'(x)]^2}=\frac{f(x)f''(x)}{[f'(x)]^2}.
+\]
+于是有$g'(p)=\frac{f(p)f''(p)}{[f'(p)]^2}=0$，又因为$g'$是连续的，$0<k<1$，所以$\exists\delta$，有$0<\delta<\delta_1$，并且$\left|g'(x)\right|\leq k$，对于所有的$x\in [p-\delta,p+\delta]$都成立。\par
+接下来需要证明$g$映射$[p-\delta,p+\delta]$到$[p-\delta,p+\delta]$。
+\[
+\left|g(x)-p\right|=\left|g(x)-g(p)\right|=\left|g'(\xi)\right|\left|x-p\right|\neq k\left|x-p\right|<\left|x-p\right|<\delta.
+\]
+综上所述，存在$\delta>0$，当$p_0\in [p-\delta,p+\delta]$都有牛顿迭代法收敛到$p$。
+\end{proof}
+
+\subsection{The Secant Method}
+\[
+p_n=p_{n-1}-\frac{f(p_{n-1})(p_{n-1}-p_{n-2})}{f(p_{n-1})-f(p_{n-2})}
+\]
+
+\subsection{The Method of False Position}
+The method generates approximations in the same manner as the Secant method, but it includes a test to ensure that the root is always bracketed between successive iterations.
+\begin{python}
+def false_position(f, start:list, max_step:int=32, eps:float=1e-6) -> float:
+    """
+    False position.
+    ----------------------------
+    Args:
+        f: Function.
+        start: List of float, the first iteration point.
+        max_step: Integer, max number of iteration.
+
+    Returns:
+        Float zero.
+        zero | fun(zero)\\sim 0.
+
+    Raises:
+        None.
+    """
+    p = [i    for i in start]
+    q = [f(i) for i in start]
+    for i in range(max_step):
+        _p = p[-1] - q[-1]*(p[-1]-p[0])/(q[-1]-q[0])
+        if abs(_p-p[-1]) < eps:
+            return (i, _p)
+        _q = f(_p)
+        if _q*q[-1] < 0:
+            p[0] = p[-1]
+            q[0] = q[-1]
+        p[-1] = _p
+        q[-1] = _q
+    return False
+\end{python}

@@ -134,8 +134,8 @@ title = """
 print(title)
 proof = """
 \\begin{align*}
-& 1+\\frac{1}{2}+\\underbrace{\\frac{1}{3}+\\frac{1}{4}}+\\ldots+\\underbrace{\\frac{1}{2^k+1}+\\ldots+\\frac{1}{2^{k+1}}}+\\ldots \\\\
->& 1+\\frac{1}{2}+\\underbrace{\\frac{1}{4}+\\frac{1}{4}}+\\ldots+\\underbrace{\\frac{1}{2^{k+1}}+\\ldots+\\frac{1}{2^{k+1}}}+\\ldots \\\\
+& 1+\\frac{1}{2}+\\underbrace{\\frac{1}{3}+\\frac{1}{4}}+\\ldots + \\underbrace{\\frac{1}{2^k+1}+\\ldots+\\frac{1}{2^{k+1}}}+\\ldots \\\\
+>& 1+\\frac{1}{2}+\\underbrace{\\frac{1}{4}+\\frac{1}{4}}+\\ldots + \\underbrace{\\frac{1}{2^{k+1}}+\\ldots+\\frac{1}{2^{k+1}}}+\\ldots \\\\
 =& 1+\\frac{1}{2}+\\frac{1}{2}+\\ldots+\\frac{1}{2}+\\ldots
 \\end{align*}
 """.replace("\n", "\n    ")

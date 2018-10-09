@@ -31,13 +31,14 @@ def fixed_point(fun, start:float=0.0, max_step:int=128, sign_dig:int=6)->float:
     Raises:
         None.
     """
-    fl = lambda x: round(x, sign_dig)
+    fl = lambda x: round(x, 100)
     eps = 10**(-sign_dig)
     new_val = fun(start)
     for i in range(0, max_step):
         old_val = fl(new_val)
         new_val = fl(fun(old_val))
-        if abs(old_val-new_val)<=eps:
+        print(new_val)
+        if abs(old_val-new_val)<=2*eps:
             return (i,new_val)
     return "Max_step..."
 
@@ -55,6 +56,7 @@ df = lambda x: -10*x**(-3)
 
 f = lambda x: 5**(-x)
 df = lambda x: -5**(-x)*np.log(5)
+print(fixed_point(f, 0, 100,sign_dig=5))
 
 title = """
 19. Use Theorem 2.4 to show that the sequence defined by
