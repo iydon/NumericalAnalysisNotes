@@ -1,0 +1,21 @@
+\section{Data Approximation and Neville's Method}
+\begin{defn}
+The Lagrange Polynomial that agrees with $f(x)$ at the $k$ distinct points $x_{m_1},x_{m_2},\cdots,x_{m_k}$ is denoted $P_{m_1,m_2,\cdots m_k}(x)$.
+\end{defn}
+\begin{theo}
+Let $f$ be defined at $x_0,x_1,\cdots,x_k$, then
+\[
+P(x)=\frac{(x-x_j)P_{0,\cdots,j-1,j+1,\cdots,k}(x)-(x-x_i)P_{0,\cdots,i-1,i+1,\cdots,k}(x)}{x_i-x_j}
+\]
+is the $k$th Lagrange polynomial that interpolates $f$ at the $k+1$ points.
+\end{theo}
+
+\subsection{Neville's Method}
+To avoid the multiple subscripts, we let $Q_{i,j}\,(0\leq j\leq i)$ denote the interpolating polynomial of degree $j$ on the $(j+1)$ numbers $x_{i-j},\cdots,x_{i}$.
+\[
+Q_{i,j} = P_{i-j,i-j+1,\cdots,i-1,i}
+\]
+then for $i=1:n$, $j=1:i$,
+\[
+Q_{i,j}=\frac{(x-x_{i-j})Q_{i,j-1}-(x-x_i)Q_{i-1,j-1}}{x_i-x_{i-j}}
+\]

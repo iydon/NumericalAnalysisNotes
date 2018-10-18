@@ -1,0 +1,58 @@
+\section{Divided Differences}
+\subsection{Divided Differences Notation}
+The $k$th divided difference relative to $x_i,\cdots,x_{i+k}$ is
+\begin{align*}
+  & f[x_i]=f(x_i) \\
+  & f[x_i,\cdots,x_{i+k}]=\frac{f[x_{i+1},\cdots,x_{i+k}]-f[x_i,\cdots,x_{i+k-1}]}{x_{i+k}-x_i}
+\end{align*}
+for each $k=0,1,\cdots,n$, $P_n(x)$ can be rewritten in a form called \emph{Newton's Divided-Difference}:
+\[
+P_n(x)=f[x_0]+\sum_{k=1}^{n}f[x_0,\cdots,x_k](x-x_0)\cdots (x-x_{k-1})
+\]
+\begin{theo}
+$f\in C^n[a,b]$, $x_i\in [a,b]$ for $i=0:n$, $\exists\xi\in (a,b)$, s.t.
+\[
+f[x_0,x_1,\cdots,x_n]=\frac{f^{(n)}(\xi)}{n!}
+\]
+\end{theo}
+\begin{proof}
+Let $g(x)=f(x)-P_n(x)$, which has $n+1$ distinct zeros in $[a,b]$. According to \emph{Generalized Rolle's Theorem}, $\exists\xi\in (a,b)$, s.t. $g^{(n)}(\xi)=0$.
+\begin{align*}
+  & 0=g^{(n)}(\xi)=f^{(n)}(\xi)-P_n^{(n)}(\xi)=f^{(n)}(\xi)-n!f[x_0,\cdots,x_k] \\
+  \Rightarrow & f[x_0,x_1,\cdots,x_n]=\frac{f^{(n)}(\xi)}{n!}
+\end{align*}
+\end{proof}
+
+When the nodes are arranged consecutively with equal spacing, then we use $h=x_{i+1}-x_i$  and $x=s\cdot h+x_0$, the equation will become
+\begin{align*}
+  P_n(x) &= P_n(x_0+sh)=f[x_0]+\sum_{k=1}^{n}s(s-1)\cdots (s-k+1)h^kf[x_0,\cdots,x_k] \\
+  &= f[x_0]+\sum_{k=1}^{n}\binom{s}{k}k!h^kf[x_0,\cdots,x_k].
+\end{align*}
+
+\subsection{Forward Differences}
+\begin{align*}
+  f[x_0,x_1]&=\frac{1}{h}\left(f(x_1)-f(x_0)\right)=\frac{1}{h}\triangle f(x_0) \\
+  f[x_0,x_1,x_2]&=\frac{1}{2h}\left(\frac{\triangle f(x_1)-\triangle f(x_0)}{h}\right)=\frac{1}{2h^2}\triangle^2f(x_0)
+\end{align*}
+In general,
+\begin{align*}
+  & f[x_0,x_1,\cdots,x_k]=\frac{1}{k!h^k}\triangle^kf(x_0) \\
+  \Rightarrow & P_n(x)=f[x_0]+\sum_{k=1}^{n}\binom{s}{k}\triangle^kf(x_0)
+\end{align*}
+\subsection{Backward Differences}
+\begin{align*}
+  f[x_n,x_{n-1}]&=\frac{1}{h}\nabla f(x_n) \\
+  f[x_n,x_{n-1},x_{n-2}]&=\frac{1}{2h^2}\nabla^2f(x_n)
+\end{align*}
+In general,
+\begin{align*}
+  & f[x_n,x_{n-1},\cdots,x_{n-k}]=\frac{1}{k!h^k}\nabla^kf(x_n) \\
+  \Rightarrow & P_n(x)=f[x_n]+\sum_{k=1}^{n}\frac{s(s+1)\cdots (s+k-1)}{k!}\nabla^kf(x_n)
+\end{align*}
+Also, we have
+\begin{align*}
+  & \binom{-s}{k}=\frac{-s(-s-1)\cdots (-s-k+1)}{k!}=(-1)^k\frac{s(s+1)\cdots (s+k-1)}{k!} \\
+  \Rightarrow & P_n(x)=f[x_n]+\sum_{k=1}^{n}(-1)^k\binom{-s}{k}\nabla^kf(x_n)
+\end{align*}
+
+\subsection{Centered Differences}

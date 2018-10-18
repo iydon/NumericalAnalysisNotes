@@ -1,0 +1,39 @@
+\section{Interpolation and the Lagrange Polynomial}
+
+\begin{theo}[Weierstrass Approximation Theorem]
+$f\in C[a,b]$, $\forall$ polynomial $P(x)$, s.t. $\left|f(x)-P(x)\right|<\epsilon$ for all $x\in [a,b]$.
+\end{theo}
+
+\begin{theo}[$n$th Lagrange Interpolating Polynomial]
+$x_0,x_1,\ldots,x_n$ are $n+1$ distinct numbers, then a unique polynomial $P(x)$ of degree at most $n$ exists with
+\begin{align*}
+  f(x_k)=P(x_k)\quad for\space k=0:n \\
+  \begin{cases}
+    P(x)=\sum_{k=0}^{n}f(x_k)L_{n,k}(x) \\
+    L_{n,k}=\prod_{\substack{i=0\\i\neq k}}^{k}\frac{(x-x_i)}{x_k-x_i} \\
+    L_{n,k}(x_j)=\delta_{k,j}
+  \end{cases}
+\end{align*}
+If $f\in C^{n+1}[a,b]$, $\exists\xi(x)\in (a,b)$, s.t.
+\[
+f(x) = P(x) + \frac{f^{(n+1)}\left(\xi\left(x\right)\right)}{(n+1)!}\prod_{i=0}^{n}(x-x_i)
+\]
+\end{theo}
+
+\begin{proof}
+let \[g(t)=f(t)-P(t)-\left[f(x)-g(x)\right]\prod_{i=0}^{n}\frac{(t-x_i)}{x-x_i},\]
+$g(t)$ satisfies
+\begin{align*}
+  \begin{cases}
+  g(x_k)=0 & k=0:n\\
+  g(x)=0 & \\
+  g\in C^{n+1}[a,b] \\
+  \end{cases}
+\end{align*}
+By \emph{Generalized Rolle's Theorem}, $\exists\xi\in (a,b)$, s.t. $g^{(n+1)}(\xi)=0$, then we have
+\begin{align*}
+& 0 = g^{(n+1)}(\xi)=f^{(n+1)}(\xi)-P^{(n+1)}(\xi)-\left[f(x)-P(x)\right]\frac{\D^{n+1}}{\D t^{n+1}}\left[\prod_{i=0}^{n}\frac{(t-x_i)}{x-x_i}\right]_{t=\xi} \\
+\Rightarrow & 0 = f^{(n+1)}(\xi)-\left[f(x)-P(x)\right]\frac{(n+1)!}{\prod_{i=0}^{n}(x-x_i)} \\
+\Rightarrow & f(x) = P(x) + \frac{f^{(n+1)}\left(\xi\left(x\right)\right)}{(n+1)!}\prod_{i=0}^{n}(x-x_i).
+\end{align*}
+\end{proof} 

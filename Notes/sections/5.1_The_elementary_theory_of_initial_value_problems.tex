@@ -1,0 +1,39 @@
+\section{The Elementary Theory of Initial-Value Problems}
+\begin{defn}[Lipschitz Condition]
+A function $f(t,y)$ is said to satisfy a \emph{Lispschitz condition} in the variable $Y$ on a set $D\subset\mathbb{R}^2$ if a constant $L>0$ exists with
+\[
+\abs{f(t,y_1)-f(t,y_2)}\leq L\abs{y_1-y_2}
+\]
+whenever $(t_1,y_1)$, $(t_2,y_2)$ are in $D$. The constant $L$ is called a \emph{Lipschitz constant} for $f$.
+\end{defn}
+\begin{defn}[Convex]
+A set $D\subset\mathbb{R}^2$ is said to be convex if whenever $(t_1,y_1),(t_2,y_2)\in D$, then for every $\lambda\in [0,1]$,
+\[
+((1-\lambda)t_1+\lambda t_2, (1-\lambda)y_1+\lambda y_2) \in D.
+\]
+\end{defn}
+\begin{theo}
+Suppose $f(t,y)$ is defined on a convex set $D\subset\mathbb{R}^2$, if a constant $L>0$ exists with
+\[
+\abs{\frac{\partial f}{\partial y}(t,y)}\leq L
+\]
+for all $(t,y)\in D$, then $f$ satisfies a Lipschitz condition on $D$ in the variable $y$ with Lipschitz constant $L$.
+\end{theo}
+\begin{theo}
+Suppose that $D=\left\{(t,y)|a\leq t\leq b,y\in\mathbb{R}\right\}$ and $f(t,y)$ is continuous on $D$. If $f$ satisfies a Lipschitz condition on $D$ in the variable $y$, then the initial-value problem
+\begin{align*}
+  \begin{cases}
+    y'(t)=f(t,y) & a\leq t\leq b \\
+    y(a)=\alpha
+  \end{cases}
+\end{align*}
+has a unique solution $y(t)$ for $a\leq t\leq b$.
+\end{theo}
+\subsection{Well-Posed Problems}
+\begin{theo}[Well-Posed]
+Suppose that $D=\left\{(t,y)|a\leq t\leq b,y\in\mathbb{R}\right\}$ and $f(t,y)$, if $f$ is continuous and satisfies a Lipschitz condition in the variable $y$ on the set $D$, then the initial-value problem
+\[
+\frac{\D y}{\D t}=f(t,y),\quad a\leq t\leq b,\quad y(a)=\alpha
+\]
+is well-posed.
+\end{theo}
