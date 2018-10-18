@@ -79,3 +79,10 @@ plt.plot(x3, y3, color="blue")
 plt.axis("equal")
 plt.grid(linestyle='-.')
 plt.show()
+
+
+xs3  = [0, 1, 2]
+fxs3 = [0, 1, 2]
+bou3 = [0.33, -1.5]
+S3   = clamped_cubic_spline(xs3, fxs3, bou3)
+f3   = cubic_spline_lambdify("S3", xs3)
