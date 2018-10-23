@@ -1,0 +1,38 @@
+\section{Higher-Order Taylor Method}
+\begin{defn}[Local Truncation Error]
+The difference method
+\begin{equation*}
+  \begin{cases}
+    \omega_0=\alpha & \\
+    \omega_{i+1}=\omega_i+h\phi(t_i+\omega_i) & \text{for each $i=0,1,\cdots,N-1$}
+  \end{cases}
+\end{equation*}
+has local truncation error
+\begin{equation*}
+  \tau_{i+1}(x)=\frac{y_{i+1}-\left(y_i+h\phi(t_i+y_i)\right)}{h}=\frac{y_{i+1}-y_i}{h}-\phi(t_i,y_i)
+\end{equation*}
+for each $i=0,1,\cdots,N-1$ where $y_i$ and $y_{i+1}$ denote the accuracy at a specific step, assuming that the method was exact at the previous step.
+\end{defn}
+Euler's method has $\tau_{i+1}=\frac{h}{2}y''(\xi_i)$, so the local truncation error in Euler's method is $O(h)$ .
+\subsection{Taylor Method of Order $n$}
+\begin{equation*}
+  \begin{cases}
+    \omega_0=\alpha & \\
+    \omega_{i+1}=\omega_i+h\phi(t_i+\omega_i) & \text{for each $i=0,1,\cdots,N-1$}
+  \end{cases}
+\end{equation*}
+where $T^{(n)}(t_i,\omega_i)=f(t_i,\omega_i)+\frac{h}{2}f'(t_i,\omega_i)+\cdots+\frac{h^{n-1}}{n!}f^{(n-1)}(t_i,\omega_i)$.
+\begin{theo}
+If Taylor's method of order $n$ is used to approximate the solution to
+\[
+\frac{\D y}{\D t}=f(t,y),\quad a\leq t\leq b,\quad y(a)=\alpha
+\]
+with step size $h$ and if $y\in C^{n+1}[a,b]$, then the local truncation error is $O(h^n)$.
+\end{theo}
+\begin{proof}
+\begin{align*}
+  y_{i+1} &= y_i+hf(t_i,y_i)+\cdots+\frac{h^n}{n!}f^{(n-1)}(t_i,y_i)+\frac{h^{n+1}}{(n+1)!}f^{(n)}(\xi_i,y(\xi_i)) \\
+  \Rightarrow & \tau_{i+1}(h) = \frac{y_{i+1}-y_i}{h}-T^{(n)}(t_i,y_i)=\frac{h^n}{(n+1)!}f^{(n)}(\xi_i,y(\xi_i))
+\end{align*}
+for each $i=0,1,\cdots,N-1$. Since $y\in C^{n+1}[a,b]$, we have $y^{(n+1)}(t)=f^{(n)}(t,y(t))$ bounded on $[a,b]$ and $\tau_i(h)=O(h^n)$ for each $i=1,2,\cdots,N$.
+\end{proof}

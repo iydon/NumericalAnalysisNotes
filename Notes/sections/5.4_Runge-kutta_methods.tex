@@ -1,0 +1,82 @@
+\section{Runge-Kutta Methods}
+\begin{theo}
+Suppose that $f(t,y)$ and all its partial derivatives of order less or equal to $n+1$ are continuous on $D=\left\{(t,y)|a\leq t\leq b,c\leq y\leq d\right\}$ ($D=[a,b]\times [c,d]$) and let $(t_0,y_0)\in D$. For every $(t,y)\in D$, there exists $\xi$ between $t$ and $t_0$ and $\mu$ between $y$ and $y_0$ with
+\[
+f(t,y) = P_n(t,y)+R_n(t,y)
+\]
+where
+\begin{align*}
+  P_n(t,y) &= f(t_0,y_0)+\left[(t-t_0)\partialD{f}{t}(t_0,y_0)+(y-y_0)\partialD{f}{y}(t_0,y_0)\right] \\
+  &+ \left[\frac{(t-t_0)^2}{2}\partialD{^2f}{t^2}(t_0,y_0)+(t-t_0)(y-y_0)\partialD{^2f}{t\partial y}(t_0,y_0)+\frac{(y-y_0)^2}{2}\partialD{^2f}{y^2}(t_0,y_0)\right] \\
+  &+ \left[\frac{1}{n!}\sum_{j=0}^{n+1}\binom{n}{j}(t-t_0)^{n-j}(y-y_0)^j\partialD{^{n+1}f}{t^{n+1}\partial y^i}(t_0,y_0)\right]
+\end{align*}
+\[
+and\quad R_n(t,y)=\frac{1}{(n+1)!}\sum_{j=0}^{n+1}\binom{n+1}{j}(t-t_0)^{n+1-j}(y-y_0)\partialD{^{n+1}f}{t^{n+1}\partial y^i}(\xi,\mu)
+\]
+The function $P_n(t,y)$ is called the \emph{$n$th Taylor polynomial in two variables} for the function $f$ about $(t_0,y_0)$, and $R_n(t,y)$ is the remainder term associated with $P_n(t,y)$.
+\end{theo}
+\subsection{Runge-Kutta Methods of Order Two}
+\begin{equation*}
+  \begin{cases}
+    y_{n+1}=y_n+h(c_1k_1+c_2k_2) &\\
+    k1 = f(x_n,y_n) &\\
+    k1 = f(x_n+\lambda_2h,y_n+\mu_{21}hk_1)
+  \end{cases}
+\end{equation*}
+\begin{align*}
+  T_{n+1} &= y(x_{n+1})-y(x_n)-h\left[c_1f(x_n,y_n)+c_2f(x_n+\lambda_2h,y_n+\mu_{21}hf_n)\right] \\
+  &= hf_n+\frac{h^2}{2}\left[f_x'(x_n,y_n)+f_y'(x_n,y_n)f_n\right] \\
+  &\quad -h\left[c_1f_n+c_2\left(f_n+\lambda_2f_x'(x_n,y_n)h+\mu_{21}f_y'(x_n,y_n)f_nh\right)\right]+O(h^3) \\
+  &= (1-c_1-c_2)f_nh+\left(\frac{1}{2}-c_2\lambda_2\right)f_x'(x_n,y_n)h^2 \\
+  &\quad +\left(\frac{1}{2}-c_2\mu_{21}\right)f_y'(x_n,y_n)f_nh^2+O(h^3) \\
+  \Rightarrow & y_{n+1}=y_n+hf\left(x_n+\frac{h}{2},y_n+\frac{h}{2}f(x_n,y_n)\right)
+\end{align*}
+
+\subsection{Midpoint Method}
+\begin{equation*}
+  \begin{cases}
+    \omega_0=\alpha & \\
+    \omega_{i+1}=\omega_i+hf\left(t_i+\frac{h}{2},\omega_i+\frac{h}{2}f(t_i,\omega_i)\right) & \text{for $i=0,\cdots,N-1$}
+  \end{cases}
+\end{equation*}
+Local truncation error: $O(h^2)$.
+
+\subsection{Modified Euler Method} \begin{equation*}
+  \begin{cases}
+    \omega_0=\alpha & \\
+    \omega_{i+1}=\omega_i+\frac{h}{2}\left[f(t_i,\omega_i),f\left(t_{i+1},\omega_i+hf(t_i,\omega_i)\right)\right] & \text{for $i=0,\cdots,N-1$}
+  \end{cases}
+\end{equation*}
+
+\subsection{Higher-Order Runge-Kutta Methods}
+Runge-Kutta Order Three:
+\begin{equation*}
+  \begin{cases}
+    \omega_0=\alpha &\\
+    k_1=hf(t_i,\omega_i) &\\
+    k_2=hf(t_i+\frac{h}{2},\omega_i+\frac{1}{2}k_1) &\\
+    k_3=hf(t_i+h,\omega-k_1+2k_2) &\\
+    \omega_{i+1}=\omega_i+\frac{1}{6}(k_1+4k_2+k_3) &\\
+  \end{cases}
+\end{equation*}
+
+Runge-Kutta Order Four:
+\begin{equation*}
+  \begin{cases}
+    \omega_0=\alpha &\\
+    k_1=hf(t_i,\omega_i) &\\
+    k_2=hf(t_i+\frac{h}{2},\omega_i+\frac{1}{2}k_1) &\\
+    k_3=hf(t_i+\frac{h}{2},\omega-k_1+\frac{1}{2}k_2) &\\
+    k_4=hf(t_i+h,\omega_i+k_3) &\\
+    \omega_{i+1}=\omega_i+\frac{1}{6}(k_1+2k_2+2k_3+k_4) &\\
+  \end{cases}
+\end{equation*}
+
+\subsection{Computational Comparisons}
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Evaluations per step & $n\in[2,4]$ & $n\in[5,7]$ & $n\in[8,9]$ & $n\in[10,\infty]$ \\ \hline
+Best possible local truncation error & $O(h^n)$ & $O(h^{n-1})$ & $O(h^{n-2})$ & $O(h^3)$ \\ \hline
+\end{tabular}
+\end{table}
