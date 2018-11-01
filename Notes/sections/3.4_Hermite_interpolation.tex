@@ -1,2 +1,51 @@
 \section{Hermite Interpolation}
-TODO
+The osculating polynomial approximating a function $f\in C^m[a,b]$ at $x_i$ for each $i=0:n$, of which the derivatives of order less than or equal to $m_i$, then the degree of this osculating polynomial is at most $M=\sum_{i=0}^{n}m_i+n$.
+\[
+\diff{^kP(x_i)}{x^k}\,=\,\diff{^kf(x_i)}{x^k},\quad\text{for each $i=0:n$, $k=0:m_i$}.
+\]
+\begin{equation*}
+    \begin{cases}
+    n=0 & \text{$m_0$ Taylor polynomial for $f$ at $x_0$} \\
+    m_i=0(\text{each $i$}) & \text{$n$th Lagrange polynomial}
+    \end{cases}
+\end{equation*}
+
+\subsection{Hermite Polynomials}
+\begin{theo}
+$f\in C'[a,b]$ and $x_0,\cdots,x_n\in [a,b]$, the unique polynomial of least degree agreeing with $f$ and $f'$ at $x_0,\cdots,x_n$ is the Hermite polynomial of degree at most $2n+1$.
+\begin{align*}
+    H_{2n+1}(x)\,=\,\sum_{j=0}^nf(x_j)H_{n,j}(x) + \sum_{j=0}^nf'(x_j)\hat{H}_{n,j}(x) \\
+    \begin{cases}
+    H_{n,j}(x) &= \left[1-2(x-x_j)L_{n,j}'(x_j)\right]L_{n,j}^2(x) \\
+    \hat{H}_{n,j}(x) &= (x-x_j)L_{n,j}^2(x)
+    \end{cases}
+\end{align*}
+Moreover, if $f\in C^{2n+2}[a,b]$, then
+\[
+f(x)=H_{2n+1}(x)+\frac{(x-x_0)^2\cdots(x-x_n)^2}{(2n+2)!}f^{(2n+2)}\left(\xi(x)\right).
+\]
+\end{theo}
+\begin{proof}
+\begin{align*}
+    & H_{n,j}(x_i)=\delta_{i,j} & & \hat{H}_{n,j}(x_i)=0 & \\
+    & H_{n,j}'(x_i)=0 & & \hat{H}_{n,j}'(x_i)=\delta_{i,j} & \\
+\end{align*}
+\end{proof}
+
+\subsection{Hermite Polynomials Using Divided Differences}
+Suppose that the distinct numbers $x_0,\cdots,x_n$ are given together with values of $f$ and $f'$. Define a new sequence $z_0,\cdots,z_{2n+1}$ by
+\[
+z_{2i} = z_{2i+1} = x_i\quad\text{for $i=0:n$}.
+\]
+We have $H_{2n+1}(x)=f[z_0]+\sum_{k=1}^{2n+1}f[z_0,\cdots,z_k](x-z_0)\cdots(x-z_{k-1})$.
+\vspace{1cm}\\
+\begin{tabular}{@{}llll@{}}
+\toprule
+$z$ & $f(z)$ & First divided differences & $\cdots$ \\ \midrule
+$z_0=x_0$ & $f[z_0]=f(x_0)$ & $f[z_0,z_1]=f'(x_0)$ & $\vdots$ \\
+$z_1=x_0$ & $f[z_1]=f(x_0)$ & $f[z_1,z_2]=\frac{f[z_2]-f[z_1]}{z_2-z_1}$ & $\vdots$ \\
+$z_2=x_1$ & $f[z_2]=f(x_1)$ & $f[z_2,z_3]=f'(x_1)$ & $\vdots$ \\
+$z_3=x_1$ & $f[z_3]=f(x_1)$ & $f[z_3,z_4]=\frac{f[z_3]-f[z_4]}{z_3-z_4}$ & $\vdots$ \\
+$z_4=x_2$ & $f[z_4]=f(x_2)$ & $f[z_4,z_5]=f'(x_2)$ &  \\
+$z_5=x_2$ & $f[z_5]=f(x_2)$ &  &  \\ \bottomrule
+\end{tabular}
