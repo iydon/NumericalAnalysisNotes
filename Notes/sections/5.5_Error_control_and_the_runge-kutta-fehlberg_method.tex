@@ -1,2 +1,74 @@
 \section{Error Control and the Runge-Kutta-Fehlberg Method}
-hello world! 
+\subsection{收敛性与相容性}
+\begin{defn}[收敛]
+若一种数值方法，对于固定的$x_n=x_0+nh$，当$h\rightarrow 0$时有$y_n\rightarrow y(x_n)$，其中$y(x)$是初值问题的精确解，则称该方法是收敛的
+\end{defn}
+\begin{theo}[整体截断误差]
+假设单步法具有$p$阶精度，且增量函数$\\varphi(x,y,h)$关于$y$满足Lipschitz条件
+\[
+\abs{\varphi(x,y,h)-\varphi(x,\bar{y},h)}\leq L_\varphi\abs{y-\bar{y}}.
+\]
+又设初值$y_0$是准确的，即$y_0=y(x_0)$，则其\textbf{整体截断误差}
+\[
+y(x_n)-y_n\,=\,O(h^p).
+\]
+\end{theo}
+\begin{proof}
+设以$\bar{y}_{n+1}$表示取$y_n=y(x_n)$用公式求得的结果，即
+\[
+\bar{y}_{n+1}=y(x_n)+h\varphi(x_n,y(x_n),h),
+\]
+则局部截断误差满足，存在常数$C$，使($p$阶精度)
+\[
+\abs{y(x_{n+1})-\bar{y}_{n+1}}\,\leq\,Ch^{p+1}
+\]
+所以有
+\begin{align*}
+    \abs{\bar{y}_{n+1}-y_{n+1}} &\leq \abs{y(x_n)-y_n}+h\abs{\varphi(x_n,y(x_n),h)-\varphi(x_n,y_n,h)} \\
+    &\leq (1+hL_\varphi)\abs{y(x_n)-y_n},
+\end{align*}
+从而有
+\begin{align*}
+    \abs{y(x_{n+1})-y_{n+1}} &\leq \abs{\bar{y}_{n+1}-y_{n+1}}+\abs{y(x_{n+1})-\bar{y}_{n+1}} \\
+    &\leq (1+hL_\varphi)\abs{y(x_n)-y_n} + Ch^{p+1}
+\end{align*}
+即对整体截断误差$e_n=y(x_n)-y_n$成立下列递推关系
+\begin{align*}
+    \abs{e_n} &\leq (1+hL_\varphi)\abs{e_{n-1}}+Ch^{p+1} \\
+    &\leq (1+hL_\varphi)^n\abs{e_0}+\frac{Ch^p}{L_\varphi}\left[(1+hL_\varphi)^n-1\right]
+\end{align*}
+再注意到当$x_n-x_0=nh\leq T$时，
+\[
+(1+hL_\varphi)^n \leq (\mathrm{e}^{hL_\varphi})^n \leq \mathrm{e}^{TL_\varphi}
+\]
+最终有
+\[
+\abs{e_n}\leq \abs{e_0}\mathrm{e}^{TL-\varphi}+\frac{Ch^p}{L_\varphi}\left(\mathrm{e}^{TL_\varphi}-1\right)
+\]
+由此可以断定，如果初值准确，即$e_0=0$，证毕。
+\end{proof}
+\begin{defn}{相容}
+若单步法的增量函数$\varphi$满足$\varphi(x,y,0)=f(x,y)$，则称单步法与初值问题是相容的。
+\end{defn}
+\begin{defn}{稳定}若一种数值方法在节点值$y_n$上大小为$\delta$的扰动，于以后各节点值$y_m(m>n)$上产生的偏差不超过$\delta$，则称该方法是\textbf{稳定的}。
+\end{defn}
+为了只考虑数值方法本身，通常只检验将数值方法用于解模型方程的稳定性，模型方程为
+\[
+y'=\lambda y.
+\]
+其中$\lambda$为复数，这个方程分析简单，对一般方程可以通过局部线性优化转化为这种形式，例如在$\bar{x},\bar{y}$的邻域，可展开为
+\[
+y'=f(x,y)=f(\bar{x},\bar{y})+f_x'(\bar{x},\bar{y})(x-\bar{x})+f_y'(\bar{x},\bar{y})(y-\bar{y})+\cdots
+\]
+\begin{defn}
+单步法对于解模型方程，若得到的解$y_{n+1}=E(h\lambda)y_n$，满足$\abs{E(h\lambda)}<1$，则称该单步法是\empty{绝对稳定的}，在$\mu=h\lambda$的平面上，使$\abs{E(h\lambda)}<1$的变量围成的区域，称为\textbf{绝对稳定域}，它与实轴的交称为\textbf{绝对稳定区间}。
+\end{defn}
+
+\begin{tabular}{ll}
+欧拉法 & $E(h\lambda)=1+h\lambda$ \\
+二阶R-K方法 & $E(h\lambda)=1+h\lambda+\frac{(h\lambda)^2}{2}$ \\
+三阶R-K方法 & $E(h\lambda)=1+h\lambda+\frac{(h\lambda)^2}{2}+\frac{(h\lambda)^3}{6}$ \\
+四阶R-K方法 & $E(h\lambda)=1+h\lambda+\frac{(h\lambda)^2}{2}+\frac{(h\lambda)^3}{6}+\frac{(h\lambda)^4}{24}$ \\
+后退欧拉法 & $E(h\lambda)=\frac{1}{1-h\lambda}$ \\
+梯形法 & $E(h\lambda)=\frac{2+h\lambda}{2-h\lambda}$
+\end{tabular} 

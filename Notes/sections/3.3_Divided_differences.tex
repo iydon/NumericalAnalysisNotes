@@ -56,3 +56,20 @@ Also, we have
 \end{align*}
 
 \subsection{Centered Differences}
+\begin{align*}
+    P_n(x)=P_{2m+1}(x) &= f[x_0]+\frac{sh}{2}\left(f[x_{-1},x_0]+f[x_0,x_1]\right)+(sh)^2f[x_{-1},x_0,x_1] \\
+    &+ \cdots \\
+    &+ s^2(s^2-1)\cdots (s^2-(m-1)^2)h^{2m}f[x_{-m},\cdots,x_{m+1}] \\
+    &+ \frac{s^2(s^2-1)\cdots(s^2-m^2)h^{2m+1}}{2}\left(f[x_{-m-1},\cdots,x_m]+f[x_{-m},\cdots,x_{m+1}]\right)
+\end{align*}
+If $n=2m+1$ is odd, we use the above formula, if $n=2m$ is even, we delete the last line and then use the above formula.
+\vspace{1cm}\\
+\begin{tabular}{@{}llllll@{}}
+\toprule
+x & f(x) & 1st & 2nd & 3rd & 4th divided differences \\ \midrule
+$x_{-2}$ & $f[x_{-2}]$ & $f[x_{-2},x_{-1}]$ & $f[x_{-2},x_{-1},x_{0}]$ & $\underline{f[x_{-2},x_{-1},x_{0},x_{1}]}$ & $\underline{f[x_{-2},x_{-1},x_{0},x_{1},x_{2}]}$ \\
+$x_{-1}$ & $f[x_{-1}]$ & $\underline{f[x_{-1},x_{0}]}$ & $\underline{f[x_{-1},x_{0},x_{1}]}$ & $\underline{f[x_{-1},x_{0},x_{1},x_{2}]}$ &  \\
+$x_{0}$ & $\underline{f[x_{0}]}$ & $\underline{f[x_{0},x_{1}]}$ & $f[x_{0},x_{1},x_{2}]$ &  &  \\
+$x_{1}$ & $f[x_{1}]$ & $f[x_{1},x_{2}]$ &  &  &  \\
+$x_{2}$ & $f[x_{2}]$ &  &  &  &  \\ \bottomrule
+\end{tabular}
