@@ -22,8 +22,8 @@ classdef factorization < handle
         function [L, U] = doolittle(matrix)
             L = doolittle(matrix);
             if nargout>1
-                U = tril(L, -1) + eye(size(L));
-                L = triu(L);
+                U = triu(L);
+                L = tril(L, -1) + eye(size(L));
             end
         end
         % cholesky

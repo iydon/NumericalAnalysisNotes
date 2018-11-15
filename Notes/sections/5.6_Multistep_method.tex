@@ -1,0 +1,25 @@
+\section{Multistep Method}
+\begin{defn}
+An $m$-step multistep method for solving the initial-value problem
+\[
+y'=f(t,y),\quad a\leq t\leq b,\quad y(a)=\alpha
+\]]
+has a difference equation for finding the approximation $\omega_{i+1}$ at the mesh point $t_{i+1}$ represented by the following equation, where $m$ is an integer greater than 1:
+\begin{align*}
+    \omega_{i+1} =& a_{m-1}\omega_{i}+a_{m-2}\omega_{i-1}+\cdots+a_{0}\omega_{i+1-m} \\
+    & + h\left[b_{m}f(t_{i+1},\omega_{i+1})+b_{m-1}f(t_{i},\omega_{i})\right. \\
+    \left.+\cdots+b_{0}f(t_{i+1-m},\omega_{i+1-m})\right]
+\end{align*}
+for $i=m-1,m,\cdots,N-1$, where $h=\frac{b-a}{N}$, the $a_0,a_1,\cdots a_{m-1}$ and $b_0,b_1,\cdots,b_m$ are constant, and the starting values
+\[
+\omega_{0}=\alpha_{0},\quad\omega_{1}=\alpha_{1},\cdots,\omega_{m-1}=\alpha_{m-1}
+\]
+are specified.
+
+\begin{equation*}
+    \begin{cases}
+    \text{When $b_m=0$, the method is called explicit, or open.} \\
+    \text{When $b_m\neq 0$, the method is called implicit, or closed.}
+    \end{cases}
+\end{equation*}
+\end{defn}

@@ -1,0 +1,51 @@
+\section{Norms of Vectors and Matrices}
+\begin{defn}
+A vector norm on $\RR^n$ is a function, $\norms{\cdot}$, from $\RR^n $to $\RR$ with the following properties.
+\begin{enumerate}[(i)]
+    \item $\norms{\bfx}\geq 0$ for all $\bfx\in\RR^n$.
+    \item $\norms{\bfx}=0$ if and only if $\bfx=\bf 0$.
+    \item $\norms{\alpha\bfx}=\abs{\alpha}\norms{\bfx}$ for all $\alpha\in\RR$ and $\bfx\in\RR^n$.
+    \item $\norms{\bfx+\bfy}\leq\norms{\bfx}+\norms{\bfy}$ for all $\bfx,\bfy\in\RR^n$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+The $l_1$, $l_2$, $l_\infty$ norms for the vector $\bfx=(x_1,x_2,\ldots,x_n)^t$ are defined by
+\begin{itemize}
+    \item $\norms{\bfx}_1$ = $\sum_{i=1}^n\abs{x_i}$
+    \item $\norms{\bfx}_2$ = $\left[\sum_{i=1}^n{x_i^2}\right]^{1/2}$
+    \item $\norms{\bfx}_\infty$ = $\max_{1\leq i\leq n}\abs{x_i}$
+\end{itemize}
+\end{defn}
+
+\begin{theo}
+The sequence of vectors ${\bfx^{(k)}}$ converges to $\bfx$ in $\RR^n$ with respect to the $l\infty$ norm if and only
+if $\lim_{k\to +\infty}x_i^{(k)}=x_i$, for each $i=1,2,\ldots,n$.
+\end{theo}
+
+\subsection{Matrix Norms and Distances}
+\begin{defn}[Matrix Norms]
+A matrix norm on the set of all $n\times n$ matrices s a real-valued function, $\norms{\cdot}$, defined on this ser, satisfying for all $n\times n$ matrices $\bfA$ and $\bfB$ and all real numbers $\alpha$.
+\begin{enumerate}[(i)]
+    \item $\norms{\bfA}\geq 0$.
+    \item $\norms{\bfA}=0$ if and only if $\bfA$ is $\bf 0$, the matrix with all 0 entries.
+    \item $\norms{\alpha\bfA}=\abs{\alpha}\norms{\bfA}$.
+    \item $\norms{\bfA+\bfB}\leq\norms{\bfA}+\norms{\bfB}$.
+    \item $\norms{\bfA\bfB}\leq\norms{\bfA}\norms{\bfB}$.
+\end{enumerate}
+\end{defn}
+
+\begin{theo}
+If $\norms{\cdot}$ is a vector norm on $\RR$, then
+\[
+\norms{\bfA}=\max_{\norms{\bfx}=1}\norms{\bfA\bfx}
+\]
+is a matrix norm.
+\end{theo}
+
+\begin{theo}
+If $\bfA=(a_{ij})$ is on $n\times n$ matrix, then
+\[
+\norms{\bfA}_\infty=\max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}.
+\]
+\end{theo}

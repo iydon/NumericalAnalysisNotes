@@ -1,0 +1,81 @@
+\section{Linear Systems of Equations and Pivoting Strategies}
+\subsection{Gaussian Elimination with Backward Substitution}
+\begin{align*}
+    E1: & a_{11}x_{1}+a{12}x_{2}+\cdots+a_{1n}x_{n} = a_{1,n+1} \\
+    E2: & a_{21}x_{1}+a{22}x_{2}+\cdots+a_{2n}x_{n} = a_{2,n+1} \\
+    & \vdots \\
+    En: & a_{n1}x_{1}+a{n2}x_{2}+\cdots+a_{nn}x_{n} = a_{n,n+1} \\
+\end{align*}
+
+\subsection{Operation Counts}
+\subsubsection{Multiplications / divisions}
+\[
+\sum_{i=1}^{n-1}(n-i)+(n-i)(n-i+1)=\frac{2n^3+3n^2-5n}{6}
+\]
+\subsubsection{Additions / subtractions}
+\[
+\sum_{i=1}^{n-1}(n-i)(n-i+1)=\frac{n^3-n}{3}
+\]
+\subsection{Backward substitution *\&/}
+\[
+1+\sum_{i=1}^{n-1}((n-i)+1)=\frac{n^2+n}{2}
+\]
+\subsection{Backward substitution +\&-}
+\[
+\sum_{i=1}^{n-1}((n-i-1)+1)=\frac{n^2-n}{2}
+\]
+
+\subsection{Gaussian Elimination with Partial Pivoting}
+\begin{python}
+def gaussian_elimination_partial_pivoting(A, b):
+    np_result = A**-1 * b
+    print(np_result.T)
+    n = A.shape[0]
+    x = np.zeros((n,1))
+    tmp = 0
+    for k in range(n-1):
+        M = k
+        for m in range(k+1,n):
+            if A[m,k] > A[M,k]: M = m
+        A[[k,M]] = A[[M,k]]
+        b[[k,M]] = b[[M,k]]
+        for i in range(k+1,n):
+            m = A[i,k] / A[k,k]
+            for j in range(k,n):
+                A[i,j] = A[i,j] - m*A[k,j]
+            b[i,0] = b[i,0] - m*b[k,0]
+    x[-1,0] = b[-1,0] / A[-1,-1]
+    for i in range(n-2,-1,-1):
+        for j in range(i+1,n):
+            tmp += A[i,j] * x[j,0]
+        x[i,0] = (b[i,0] - tmp) / A[i,i]
+        tmp = 0
+    return x
+\end{python}
+
+\subsection{Gaussian Elimination with Scaled Partial Pivoting}
+\begin{python}
+def gaussian_elimination_scaled_partial_pivoting(A, b):
+    np_result = A**-1 * b
+    print(np_result.T)
+    n = A.shape[0]
+    x = np.zeros((n,1))
+    tmp = 0
+    for k in range(n):
+        M = np.max(A[k,:])
+        A[k,:] /= M
+        b[k,0] /= M
+    for k in range(n-1):
+        for i in range(k+1,n):
+            m = A[i,k] / A[k,k]
+            for j in range(k,n):
+                A[i,j] = A[i,j] - m*A[k,j]
+            b[i,0] = b[i,0] - m*b[k,0]
+    x[-1,0] = b[-1,0] / A[-1,-1]
+    for i in range(n-2,-1,-1):
+        for j in range(i+1,n):
+            tmp += A[i,j] * x[j,0]
+        x[i,0] = (b[i,0] - tmp) / A[i,i]
+        tmp = 0
+    return x
+\end{python}

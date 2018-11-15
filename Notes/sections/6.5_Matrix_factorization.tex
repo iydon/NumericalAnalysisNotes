@@ -1,0 +1,21 @@
+\section{Matrix Factorization}
+\begin{theo}
+If Gaussian elimination can be performed on the linear system $Ax=b$ without row interchanges, then the matrix $A$ can be factored into the product of a lower-triangular maxtrix $L$ and an upper-triangular matrix $U$, that is $A=LU$, where $m_{ji}=a_{ji}^{(i)}/a_{ii}^{(i)}$
+\[
+U=
+\begin{pmatrix}
+a_{11}^{(1)} & a_{12}^{(1)} & \cdots       & a_{1n}^{(1)} \\
+0            & a_{22}^{(2)} & \ddots       & \vdots       \\
+\vdots       & \ddots       & \ddots       & a_{n-1,n}^{(n-1)} \\
+0            & \cdots       & 0            & a_{nn}^{(n)}
+\end{pmatrix}
+\quad
+U=
+\begin{pmatrix}
+1            & 0            & \cdots       & 0            \\
+m_{21}       & \ddots       & \ddots       & \vdots       \\
+\vdots       & \ddots       & \ddots       & 0            \\
+m_{n1}       & \cdots       & m_{n,n-1}    & 1
+\end{pmatrix}
+\]
+\end{theo}
