@@ -1,29 +1,47 @@
-\documentclass{ctexart}
+\documentclass[openany]{ctexbook}
 \input{preamble}
 \input{symbols}
+\addtocounter{chapter}{-1} % start from 0.
 \begin{document}
 \maketitle\newpage\tableofcontents\newpage
 % -------
-% \input{sections/0_Preface}\newpage
-% \input{sections/1_Error_Analysis}\newpage
-% \input{sections/2.3_Newton_method_and_its_extensions}
-% \input{sections/2.4_Error_analysis_for_iterative_methods}
-% \input{sections/3.1_Interpolation_and_the_lagrange_polynomial}
-% \input{sections/3.2_Data_approximation_and_nevilles_method}
-% \input{sections/3.3_Divided_differences}
-% \input{sections/3.4_Hermite_interpolation}
-% \input{sections/3.5_Cubic_spline_interpolation}
-% \input{sections/4.1_Numerical_ifferentiation}
+\iffalse
+\chapter{Preface}
+  \input{sections/0_Preface}\newpage
 
-% \input{sections/5.1_The_elementary_theory_of_initial_value_problems}
-% \input{sections/5.2_Eulers_method}
-% \input{sections/5.3_Higher-order_taylor_method}
-% \input{sections/5.4_Runge-kutta_methods}
-% \input{sections/5.5_Error_control_and_the_runge-kutta-fehlberg_method}
-% \input{sections/5.6_Multistep_method}
-% \input{sections/6.1.2_Linear_systems_of_equations_Pivoting_strategies}
-% \input{sections/6.5_Matrix_factorization}
-% \input{sections/7.1_Norms_of_vectors_and_matrices}
-\input{sections/7.2_Eigenvalues-and_eigenvectors}
+\chapter{Mathematical Preliminaries and Error Analysis}
+  \input{sections/1_Error_Analysis}\newpage
+
+\chapter{Solutions of Equations in One Variable}
+  \input{sections/2.3_Newton_method_and_its_extensions}
+  \input{sections/2.4_Error_analysis_for_iterative_methods}
+
+\chapter{Interpolation and Polynomial Approximation}
+  \input{sections/3.1_Interpolation_and_the_lagrange_polynomial}
+  \input{sections/3.2_Data_approximation_and_nevilles_method}
+  \input{sections/3.3_Divided_differences}
+  \input{sections/3.4_Hermite_interpolation}
+  \input{sections/3.5_Cubic_spline_interpolation}
+  
+\chapter{Numerical Differentiation and Integration}
+  \input{sections/4.1_Numerical_ifferentiation}
+
+\chapter{Initial-Value Problems for Ordinary Differential Equations}
+  \input{sections/5.1_The_elementary_theory_of_initial_value_problems}
+  \input{sections/5.2_Eulers_method}
+  \input{sections/5.3_Higher-order_taylor_method}
+  \input{sections/5.4_Runge-kutta_methods}
+  \input{sections/5.5_Error_control_and_the_runge-kutta-fehlberg_method}
+  \input{sections/5.6_Multistep_method}
+  
+\chapter{Direct Methods for Solving Linear Systems}
+  \input{sections/6.1.2_Linear_systems_of_equations_Pivoting_strategies}
+  \input{sections/6.5_Matrix_factorization}
+
+\fi
+
+\chapter{Iterative Techniques in Matrix Algebra}
+  \input{sections/7.1_Norms_of_vectors_and_matrices}
+  \input{sections/7.2_Eigenvalues-and_eigenvectors}
 % -------
-\end{document} 
+\end{document}
