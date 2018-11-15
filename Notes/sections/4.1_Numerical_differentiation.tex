@@ -1,0 +1,71 @@
+\section{Numerical Differentiation}
+To approximate $f'(x)$($x_0\in(a,b)$, $f\in C^2[a,b]$), $x_1=x_0+h\in[a,b]$.
+\begin{align*}
+    & f(x) = P_{0,1}(x)+\frac{(x-x_0)(x-x_1)}{2!}f''(\xi(x)) \\
+    & \phantom{f(x)} = \frac{f(x_0)(x-x_0-h)}{-h}+\frac{f(x_0)(x-x_0)}{h}+\frac{(x-x_0)(x-x_1)}{2}f''(\xi(x)) \\
+    \Rightarrow & f'(x) = \frac{f(x_0+h)-f(x_0)}{h}+\frac{2(x-x_0)-h}{2}f''(\xi(x))+\frac{(x-x_0)(x-x_0-h)}{2}D_x\left(f''(\xi(x))\right) \\
+    \Rightarrow & f'(x_0)=\frac{f(x_0+h)-f(x_0)}{h}-\frac{h}{2}f''(\xi)
+\end{align*}
+The above formula is known as the forward-difference formula if $h>0$, and the backward-difference formula if $h<0$.
+
+\begin{theo}[(n+1)-point Formula]
+$\{x_0,x_1,\ldots,x_n\}$ are $(n+1)$ distinct numbers in interval $I$, $f\in C^{n+1}(I)$.
+\begin{align*}
+    & f(x) = \sum_{k=0}^nf(x_k)L_k(x)+\prod_{k=0}^n\left(\frac{x-x_k}{k+1}\right)f^{(n+1)}(\xi(x)). \\
+    \Rightarrow & f'(x) = \sum_{k=0}^nf(x_k)L_k'(x)+D_x\left[\prod_{k=0}^n\left(\frac{x-x_k}{k+1}\right)\right]f^{(n+1)}(\xi(x)) \\
+    & \phantom{f(x)} + \prod_{k=0}^n\left(\frac{x-x_k}{k+1}\right) D_x\left[f^{(n+1)}(\xi(x))\right]. \\
+    \Rightarrow & f'(x_j) = \sum_{k=0}^nf(x_k)L_k'(x_j)+\frac{f^{(n+1)}(\xi(x_j))}{(n+1)!}\prod_{k=0 \atop k\neq j}^n(x_j-x_k).
+\end{align*}
+\end{theo}
+
+\subsection{Three-Point Formulas}
+If the nodes are equally spaced, $x_1=x_0+h$, $x_2=x_0+2h$, then
+\begin{itemize}
+    \item Three-Point Formula
+    \[
+     f'(x_0) = \frac{1}{h}\left[\frac{1}{2}f(x_0)-2f(x_0+h)+\frac{3}{2}f(x_0+2h)\right] + \frac{h^2}{3}f^{(3)}(\xi_0).
+    \]
+    \item Three-Point Endpoint Formula
+    \[
+     f'(x_0) = \frac{1}{h}\left[-\frac{3}{2}f(x_0)+2f(x_0+h)-\frac{1}{2}f(x_0+2h)\right] + \frac{h^2}{3}f^{(3)}(\xi_1).
+    \]
+    \item Three-Point Midpoint Formula
+    \[
+     f'(x_0) = \frac{1}{h}\left[-\frac{1}{2}f(x_0)+\frac{1}{2}f(x_0+2h)\right] - \frac{h^2}{6}f^{(3)}(\xi_2).
+    \]
+\end{itemize}
+
+\subsection{Five-Point Formulas}
+\begin{itemize}
+    \item Five-Point Midpoint Formula
+    \begin{align*}
+    f'(x_0)&=\frac{1}{12h}\left[f(x_0-2h)-8f(x_0-h)+8f(x_0+h)\right.\\
+    &\left.-f(x_0+2h)\right] + \frac{h^4}{30}f^{(5)}(\xi).
+    \end{align*}
+    \item Five-Point Endpoint Formula
+    \begin{align*}
+    f'(x_0)&=\frac{1}{12h}\left[-25f(x_0)+48f(x_0+h)-36f(x_0+2h)\right.\\
+    &\left.+16f(x_0+3h-3f(x_0+4h))\right] + \frac{h^4}{5}f^{(5)}(\xi).
+    \end{align*}
+\end{itemize}
+
+\subsection{Second Derivative Midpoint Formula}
+\[
+f''(x_0)=\frac{1}{h}\left[f(x_0-h)-2f(x_0)+f(x_0+h)\right] - \frac{h^2}{12}f^{(4)}(\xi)
+\]
+If $f^{(4)}$ is continuous on $[x_0-h,x_0+h$, it is also bounded, and the approximation is $O(h^2)$.
+
+\subsection{Round-Off Error Instability}
+\[
+f'(x_0)=\frac{1}{2h}\left[f(x_0+h)-f(x_0-h)\right] - \frac{h^2}{6}f^{(3)}(\xi_1)
+\]
+Suppose that in evaluating $f(x_0+h)$ and $f(x_0-h)$ we encounter round-off errors $e(x_0+h)$ and $e(x_0-h)$.
+\[
+f(x_0+h)=\tilde{f}(x_0+h)+e(x_0+h)\qquad and\qquad f(x_0-h)=\tilde{f}(x_0-h)+e(x_0-h)
+\]
+The total error in the approximation
+\begin{align*}
+\abs{f'(x_0)-\frac{\tilde{f}(x_0+h)-\tilde{f}(x_0-h)}{2h}}&=\abs{\frac{e(x_0+h)-e(x_0-h)}{2h}-\frac{h^2}{6}f^{(3)}(\xi_1)} \\
+& \leq \frac{\varepsilon}{h}+\frac{h^2}{6}M,
+\end{align*}
+where $e(x_0\pm h)$ are bounded by $\varepsilon>0$ and $f^{(3)}$ are bounded by $M>0$. There is an optimal $h$ such that the bound is small.

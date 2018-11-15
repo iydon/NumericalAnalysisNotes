@@ -114,7 +114,23 @@
 \newfancytheorem[section]{example}{例}{$\pi$}
 % Algorithmic
 \usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+% hyperref
+\usepackage[breaklinks,colorlinks,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+% logo
+\def\SUSTeX{%
+  S\kern-.13em\relax%
+  \raisebox{-.45ex}{%
+    U\kern-.10em\relax%
+  }%
+  \raisebox{-.06ex}{%
+    S\kern-.15em\relax%
+  }%
+  \TeX%
+}
+
+
+
 % information
 \title{Numerical Analysis}
-\author{Iydon}
-\date{\today} 
+\author{Iydon {\it de} \SUSTeX}
+\date{\today}

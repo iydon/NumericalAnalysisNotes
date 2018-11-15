@@ -148,7 +148,8 @@ p_n=p_{n-1}-\frac{f(p_{n-1})(p_{n-1}-p_{n-2})}{f(p_{n-1})-f(p_{n-2})}
 \subsection{The Method of False Position}
 The method generates approximations in the same manner as the Secant method, but it includes a test to ensure that the root is always bracketed between successive iterations.
 \begin{python}
-def false_position(f, start:list, max_step:int=32, eps:float=1e-6) -> float:
+def false_position(f, start:list, max_step:int=32, ...
+    eps:float=1e-6) -> float:
     """
     False position.
     ----------------------------

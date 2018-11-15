@@ -1,1 +1,38 @@
 \section{Eigenvalues and Eigenvectors}
+If $\bfA$ is a square matrix, the \emph{characteristic polynomial} of $\bfA$ is defined by $p(\lambda)=\det(\bfA-\lambda I)$, the zeros of $p$ are \emph{eigenvalues}, or characteristic values, of the matrix $\bfA$.
+
+\subsection{Spectral Radius}
+\begin{defn}[Spectral Radius]
+The \emph{spectral radius} $\rho(\bfA)$ of a matrix $\bfA$ is defined by
+\[
+\rho(\bfA)=\max\abs{\lambda},\quad\text{where $\lambda$ is an eigen value of $\bfA$.}
+\]
+(For complex $\lambda=\alpha+\beta i$, we define $\abs{\lambda}=(\alpha^2+\beta^2)^{1/2}.$)
+\end{defn}
+
+\begin{theo}
+If $\bfA$ is an $n\times n$ matrix, then
+\begin{enumerate}[(i)]
+    \item $\norms{\bfA}_2=\left[\rho(A^tA)\right]^{1/2}$,
+    \item $\rho(\bfA)\leq\norms{\bfA}$, for any natural norm $\norms{\cdot}$.
+\end{enumerate}
+\end{theo}
+
+\subsection{Convergent Matrices}
+\begin{defn}[Convergent]
+We call an $n\times n$ matrix $\bfA$  convergent if
+\[
+\lim_{k\to\infty}(\bfA^k)_{ij}=0,\quad\text{for each $i=1,2,\ldots,n$ and $j=1,2,\ldots,n$.}
+\]
+\end{defn}
+
+\begin{theo}
+The following statements are equivalent
+\begin{enumerate}[(i)]
+    \item $\bfA$ is a convergent matrix.
+    \item $\lim_{n\to\infty}\norms{\bfA^n}=0$, for some natural norm.
+    \item $\lim_{n\to\infty}\norms{\bfA^n}=0$, for all natural norms.
+    \item $\rho(\bfA)<1$.
+    \item $\lim_{n\to\infty}\bfA^n\bfx=\bf 0$, for every $\bfx$.
+\end{enumerate}
+\end{theo}
