@@ -1,0 +1,17 @@
+\section{Richardson's Extrapolation}
+Suppose that for each number $h\neq 0$, we have a formula $N_1(h)$ that approximates an unknown constant $M$ with truncation error $O(h)$
+\begin{align*}
+    M-N_1(h) &= K_1h+K_2h^2+K_3h^3+\ldots \\
+    M-N_1\left(\frac{h}{2}\right) &= K_1h+K_2\frac{h^2}{4}+K_3\frac{h^3}{8}+\ldots \\
+\end{align*}
+If we subtract the first equation from the second equation, then we'll get
+\begin{align*}
+    & M=N_1\left(\frac{h}{2}\right)+\left[N_1\left(\frac{h}{2}-N_1(h)\right)\right] + K_2\left(\frac{h^2}{2}-h^2\right) + K_3\left(\frac{h^3}{4}-h^3\right) + \ldots \\
+    \Rightarrow & N_2(h) = N_1\left(\frac{h}{2}\right) + \left[N_1\left(\frac{h}{2}-N_1(h)\right)\right] \\
+    \Rightarrow & M = N_2(h) - \frac{K_2}{2}h^2 - \frac{3K_3}{4}h^3 + \ldots \qquad \text{with truncation error $O(h^2)$}
+\end{align*}
+\begin{align*}
+    & M=N_2\left(\frac{h}{2}\right)+\left[N_2\left(\frac{h}{2}-N_2(h)\right)\right]/3 + \frac{K_3}{8}h^3 + \ldots \\
+    \Rightarrow & N_3(h) = N_2\left(\frac{h}{2}\right) + \left[N_2\left(\frac{h}{2}-N_2(h)\right)\right]/3 \\
+    \Rightarrow & M = N_3(h) - \frac{K_3}{8}h^3 + \frac{7K_3}{48}h^4 + \ldots \qquad \text{with truncation error $O(h^3)$}
+\end{align*}
