@@ -1,1 +1,9 @@
 \section{Elements of Numerical Integration}
+\begin{align*}
+    \int_a^bf(x)\D x &= \int_a^b\sum_{i=0}^nf(x_i)L_i(x)\D x + \int_a^b\prod_{i=0}^n(x-x_i)\frac{f^{(n+1)}(\xi(x))}{(n+1)!}\D x \\
+    &= \int_a^ba_if(x_i)\D x + \frac{1}{(n+1)!}\int_a^b\prod_{i=0}^n(x-x_i)f^{(n+1)}(\xi(x)\D x,
+\end{align*}
+where $a_i=\int_a^bL_i(x)\D x$ for each $i=0,1,\ldots,n$.
+
+\subsection{The Trapezoidal Rule}
+To derive the Trapezoidal rule for approximating $\int_a^bf(x)\D x$, let $x_0=a$, $x_1=b$, $h=b-a$.
