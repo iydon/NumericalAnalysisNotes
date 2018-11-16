@@ -28,7 +28,7 @@ Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape'
 # Chapter 4: Numerical Differentiation and Integration
 - [x] 4.1 Numerical Differentiation
 - [x] 4.2 Richardson's Extrapolation
-- [ ] 4.3 Elements of Numerical Integration
+- [x] 4.3 Elements of Numerical Integration
 - [ ] 4.4 Composite Numerical Integration
 - [ ] 4.5 Romberg Integration
 - [ ] 4.6 Adaptive Quadrature Methods

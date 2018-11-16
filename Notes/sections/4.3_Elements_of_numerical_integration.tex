@@ -7,3 +7,97 @@ where $a_i=\int_a^bL_i(x)\D x$ for each $i=0,1,\ldots,n$.
 
 \subsection{The Trapezoidal Rule}
 To derive the Trapezoidal rule for approximating $\int_a^bf(x)\D x$, let $x_0=a$, $x_1=b$, $h=b-a$.
+\begin{align*}
+    \int_a^bf(x)\D x &= \int_a^b\left[\frac{(x-x_0)}{(x_1-x_0)f(x_1)}+\frac{(x-x_1)}{(x_0-x_1)f(x_0)}\right]\D x + \frac{1}{2}\int_a^b(x-x_0)(x-x_1)f''(\xi(x))\D x \\
+    &= \int_{x_0}^{x_1}\frac{(x-x_0)f(x_1)-(x-x_1)f(x_0)}{x_1-x_0}\D x + \frac{f''(\xi)}{2}\left[\frac{x^3}{3}-\frac{(x_0+x_1)}{2}x^2+x_0x_1x\right]_{x_0}^{x_1} \\
+    &= \left[\frac{(x-x_0)^2f(x_1)-(x-x_1)^2f(x_0)}{2(x_0-x_1)}\right]_{x_0}^{x_1} - \frac{h^3}{12}f''(\xi) \\
+    &= \frac{h}{2}\left[f(x_0)+f(x_1)\right]-\frac{h^3}{12}f''(\xi).
+\end{align*}
+
+\subsection{Simpson's Rule}
+\begin{align*}
+    \int_{x_0}^{x_2}f(x)\D x &= \left[f(x_1)(x-x_1)+\frac{f'(x_1)}{2}(x-x_1)^2+\frac{f''(x_1)}{6}(x-x_1)^3+\frac{f^{(3)}(x_1)}{24}(x-x_1)^4\right]_{x_0}^{x_2} \\
+    &\phantom{=} + \frac{1}{24}\int_{x_0}^{x_2}f^{(4)}(\xi(x))(x-x_1)^4\D x \\
+    &= 2hf(x_1) + \frac{h^3}{3}f''(x_1) + \frac{f^{(4)}(\xi_1)}{60}h^5 \\
+    &= 2hf(x_1)+\frac{h^3}{3}\left\{\frac{1}{h^2}\left[f(x_0)-2f(x_1)+f(x_2)\right]-\frac{h^2}{12}f^{(4)}(\xi_2)\right\} + \frac{f^{(4)}(\xi_1)}{60}h^5 \\
+    &= \frac{h}{3}\left[f(x_0)+4f(x_1)+f(x_2)\right]-\frac{h^5}{12}\left[\frac{1}{3}f^{(4)}(\xi_2)-\frac{1}{5}f^{(4)}(\xi_1)\right] \\
+    &= \frac{h}{3}\left[f(x_0)+4f(x_1)+f(x_2)\right]-\frac{h^5}{90}f^{(4)}(\xi)
+\end{align*}
+
+\subsection{Measuring Precision}
+\begin{defn}[The degree of accuracy or precision]\hfill\\
+The largest positive integer $n$ such that the formula is exact for $x^k$ for $k=0,1,\ldots,n$.
+\end{defn}
+
+\subsection{New-tom-Cotes Formulas}
+The Trapezoidal and Simpson's rules are examples of a class of methods known as Newton-Cotes formulas. There are two types of Newton-Cotes formulas, open and closed.
+
+\subsubsection{Closed Newton-Cotes Formulas}
+The $(n+1)$-point closed Newton-Cotes uses nodes $x_i=x_0+ih$, for $i=0,1,\ldots,n$, where $x_0=a$, $x_n=b$ and $h=(b-a)/n$.
+\begin{theo}
+If $n$ is even and $f\in C^{n+2}[a,b]$
+\[
+\int_a^bf(x)\D x=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{(n+2)}(\xi)}{(n+2)!}\int_0^nt^2(t-1)\ldots(t-n)\D t.
+\]
+If $n$ is odd and $f\in C^{n+1}[a,b]$
+\[
+\int_a^bf(x)\D x=\sum_{i=0}^na_if(x_i)+\frac{h^{n+2}f^{(n+1)}(\xi)}{(n+1)!}\int_0^nt(t-1)\ldots(t-n)\D t.
+\]
+
+$\xi\in(a,b)$.
+\end{theo}
+
+\begin{enumerate}[n=1]
+    \item Trapezoidal rule
+        \begin{align*}
+        \int_{x_0}^{x_1}f(x)\D x=\frac{h}{2}\left[f(x_0)+f(x_1)\right]-\frac{h^3}{12}f''(\xi)
+        \end{align*}
+    \item Simpson's rule
+        \begin{align*}
+        \int_{x_0}^{x_2}f(x)\D x=\frac{h}{3}\left[f(x_0)+4f(x_1)+f(x_2)\right]-\frac{h^5}{90}f^{(4)}(\xi)
+        \end{align*}
+    \item Simpson's Three-Eighths rule
+        \begin{align*}
+        \int_{x_0}^{x_3}f(x)\D x=\frac{3h}{8}\left[f(x_0)+3f(x_1)+3f(x_2)+f(x_3)\right]-\frac{3h^5}{80}f^{(4)}(\xi)
+        \end{align*}
+    \item \phantom{Unknown Name}
+        \begin{align*}
+        \int_{x_0}^{x_4}f(x)\D x=\frac{2h}{45}\left[7f(x_0)+32f(x_1)+12f(x_2)+32f(x_3)+7f(x_4)\right]-\frac{8h^7}{945}f^{(6)}(\xi)
+        \end{align*}
+\end{enumerate}
+
+
+
+\subsubsection{Open Newton-Cotes Formulas}
+The open Newton-Cotes formulas do not include the endpoints of $[a,b]$ as nodes. They use the nodes $x_i=x_0+ih$, for $i=0,1,\ldots,n$, where $h=(b-a)/(n+2)$ and $x_0=a+h$, $x_n=b-h$.
+\begin{theo}
+If $n$ is even and $f\in C^{n+2}[a,b]$
+\[
+\int_a^bf(x)\D x=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{(n+2)}(\xi)}{(n+2)!}\int_{-1}^{n+1}t^2(t-1)\ldots(t-n)\D t.
+\]
+If $n$ is odd and $f\in C^{n+1}[a,b]$
+\[
+\int_a^bf(x)\D x=\sum_{i=0}^na_if(x_i)+\frac{h^{n+2}f^{(n+1)}(\xi)}{(n+1)!}\int_{-1}^{n+1}t(t-1)\ldots(t-n)\D t.
+\]
+
+$\xi\in(a,b)$.
+\end{theo}
+
+\begin{enumerate}[n=1]\addtocounter{enumi}{-1}
+    \item Midpoint rule
+        \begin{align*}
+        \int_{x_{-1}}^{x_1}f(x)\D x=2hf(x_0)+\frac{h^3}{3}f''(\xi)
+        \end{align*}
+    \item \phantom{Unknown Name}
+        \begin{align*}
+        \int_{x_{-1}}^{x_2}f(x)\D x=\frac{3h}{2}\left[f(x_0)+f(x_1)\right]-\frac{3h^3}{4}f''(\xi)
+        \end{align*}
+    \item \phantom{Unknown Name}
+        \begin{align*}
+        \int_{x_{-1}}^{x_3}f(x)\D x=\frac{4h}{3}\left[2f(x_0)-f(x_1)+2f(x_2)\right]+\frac{14h^5}{45}f^{(4)}(\xi)
+        \end{align*}
+    \item \phantom{Unknown Name}
+        \begin{align*}
+        \int_{x_{-1}}^{x_4}f(x)\D x=\frac{5h}{24}\left[11f(x_0)+f(x_1)+f(x_2)+11f(x_3)\right]+\frac{95h^7}{144}f^{(4)}(\xi)
+        \end{align*}
+\end{enumerate}
