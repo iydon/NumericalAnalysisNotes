@@ -1,0 +1,43 @@
+\section{Composite Numerical Integration}
+To calculate an aribitrary integral $\int_a^bf(x)\D x$, choose an even integer $n$, subdivide the interval $[a,b]$ into $n$ subinterval, and apply Simpson's rule on each consecutive pair of subintervals. With $h=(b-a)/h$ and $x_j=a+jh$, for $j=0,1,\ldots,n$, we have
+\begin{align*}
+    \int_a^bf(x)\D x &= \sum_{j=1}^{n/2}\int_{x_{2j-2}}^{x_{2j}}f(x)\D x \\
+    &= \sum_{j=1}^{n/2}\left\{\frac{h}{3}\left[f(x_{2j-2})+4f(x_{2j-1})+f(x_{2j})\right]-\frac{h^5}{90}f^{(4)}(\xi_j)\right\} \\
+    &= \frac{h}{3}\left[f(x_0)+2\sum_{j=1}^{n/2-1}f(x_{2j})+4\sum_{j=1}^{n/2}f(x_{2j-1})+f(x_n)\right] - \frac{h^5}{90}\sum_{j=1}^{n/2}f^{(4)}(\xi_j) \\
+    &= \frac{h}{3}\left[\cdots\cdots\right]-\frac{h^5}{90}\left(\frac{n}{2}\right)f^{(4)}(\mu) \\
+    &= \frac{h}{3}\left[\cdots\cdots\right]-\frac{(b-a)}{180}h^4f^{(4)}(\mu) \\
+\end{align*}
+
+\begin{theo}[Composite Simpson's Rule]
+Let $f\in C^4[a,b]$, $n$ be even, $h=\frac{b-a}{n}$, and $x_j=a+jh$ for $j=0,1,\ldots,n$.
+There exists a $\mu\in(a,b)$ s.t. with $n$ subintervals
+\begin{align*}
+\int_a^bf(x)\D x =& \frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})+4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right] \\
+&- \frac{b-a}{180}h^4f^{(4)}(\mu).
+\end{align*}
+\end{theo}
+
+\begin{theo}[Composite Trapezoidal Rule]
+Let $f\in C^2[a,b]$, $n$ be even, $h=\frac{b-a}{n}$, and $x_j=a+jh$ for $j=0,1,\ldots,n$.
+There exists a $\mu\in(a,b)$ s.t. with $n$ subintervals
+\[
+\int_a^bf(x)\D x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right] - \frac{b-a}{12}h^2f''(\mu).
+\]
+\end{theo}
+
+\begin{theo}[Composite Midpoint Rule]
+Let $f\in C^2[a,b]$, $n$ be even, $h=\frac{b-a}{n+2}$, and $x_j=a+(j+1)h$ for $j=-1,0,\ldots,n+1$.
+There exists a $\mu\in(a,b)$ s.t. with $n+2$ subintervals
+\[
+\int_a^bf(x)\D x=2h\sum_{j=0}^{n/2}f(x_{2j}) + \frac{b-a}{6}h^2f''(\mu).
+\]
+\end{theo}
+
+\subsection{Round-off Error Stability}
+\begin{align*}
+    e(h) &= \abs{\frac{h}{3}\left[e_0+2\sum_{j=1}^{n/2-1}e_{2j}+4\sum_{j=1}^{n/2}e_{2j-1}+e_n\right]} \\
+    &\leq \frac{h}{3}\left[\abs{e_0}+2\sum_{j=1}^{n/2-1}\abs{e_{2j}}+4\sum_{j=1}^{n/2}\abs{e_{2j-1}}+\abs{e_n}\right] \\
+    &\leq \frac{h}{3}\left[\varepsilon+2(\frac{n}{2}-1)\varepsilon+4(\frac{n}{2})\varepsilon+\varepsilon\right]=\frac{h}{3}3h\varepsilon = nh\varepsilon \\
+    &= (b-a)\varepsilon.
+\end{align*}
+If the round-off errors are uniformly bounded by $\varepsilon$.
