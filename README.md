@@ -30,9 +30,9 @@ Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape'
 - [x] 4.2 Richardson's Extrapolation
 - [x] 4.3 Elements of Numerical Integration
 - [x] 4.4 Composite Numerical Integration
-- [ ] 4.5 Romberg Integration
+- [x] 4.5 Romberg Integration
 - [ ] 4.6 Adaptive Quadrature Methods
-- [ ] 4.7 Gaussian Quadrature
+- [x] 4.7 Gaussian Quadrature
 - [ ] 4.8 Multiple Integrals
 - [ ] 4.9 Improper Integrals
 - [ ] 4.10 Survey of Methods and Software

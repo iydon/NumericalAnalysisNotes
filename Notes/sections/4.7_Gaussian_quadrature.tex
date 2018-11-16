@@ -1,0 +1,32 @@
+\section{Gaussian Quadrature}
+\subsection{Legendre Polynomial}
+\begin{theo}
+Suppose $x_1,x_2\ldots,x_n$ are the roots of the $n$th Legendre polynomial $P_n(x)$ and that for $i=1,2,\ldots,n$ the number $C_i$ are defined by
+\[
+C_i = \int_{-1}^1\prod_{j=1\atop j\neq i}^n\left(\frac{x-x_j}{x_i-x_j}\right)\D x.
+\]
+If $P(x)$ is any polynomial of degree less than $2n$, then
+\[
+\int_{-1}^1P(x)\D x = \sum_{i=1}^nC_iP(x_i)
+\]
+\end{theo}
+
+\begin{proof}
+\begin{enumerate}[(1)]
+    \item $P(x)$ is of degree less than $n$.
+        \begin{align*}
+        \int_{-1}^1P(x)\D x &= \int_{-1}^1\sum_{i=1}^{n}P(x_i)L_i(x)\D x = \int_{-1}^1\sum_{i=1}^n\prod_{j=1\atop j\neq i}^n\left(\frac{x-x_j}{x_i-x_j}\right)P(x_i)\D x\\
+        &= \sum_{i=1}^n\left[\int_{-1}^1\prod_{j=1\atop j\neq i}^n\left(\frac{x-x_j}{x_i-x_j}\right)\D x\right]P(x_i) = \sum_{i=1}^nC_iP(x_i).
+        \end{align*}
+    \item $P(x)$ is of degree at least $n$ but less than $2n$.
+        \begin{align*}
+        P(x_i)=Q(x_i)P_n(x_i)+R(x_i)=R(x_i)\quad\text{(degree less than $n$)}.
+        \end{align*}
+\end{enumerate}
+\end{proof}
+
+\subsection{Gaussian Quadrature on Arbitrary Intervals}
+An integral $\int_a^bf(x)\D x$ over an arbitrart $[a,b]$ can be transformed into an integral over $[-1,1]$
+\[
+\int_a^bf(x)\D x = \int_{-1}^1f\left(\frac{(b-a)t+(b+a)}{2}\right)\frac{(b-a)}{2}\D t.
+\]
