@@ -1,7 +1,7 @@
 # Numerical_Analysis_Notes
-![Windows](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
+![Windows](https://img.shields.io/badge/platform-Windows-green.svg)
 ![TeX](https://img.shields.io/badge/language-TeX-orange.svg)
-![MIT](https://img.shields.io/badge/license-MIT-000000.svg)
+![MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape')
 
