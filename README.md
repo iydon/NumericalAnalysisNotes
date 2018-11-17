@@ -1,4 +1,8 @@
 # Numerical_Analysis_Notes
+![Windows](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
+![TeX](https://img.shields.io/badge/language-TeX-orange.svg)
+![MIT](https://img.shields.io/badge/license-MIT-000000.svg)
+
 Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape')
 
 # Chapter 1: Mathematical Preliminaries and Error Analysis
