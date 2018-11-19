@@ -9,7 +9,7 @@ import numpy as np
 
 def jacobi_method(A, b):
 	A_,b_ = A.copy(),b.copy()
-	diag  = np.diag(A)
+	diag  = np.diag(A_)
 	shap  = A.shape
 	A_ = np.diag(diag) - A_
 	x_ = np.zeros(b.shape)
