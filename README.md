@@ -8,7 +8,7 @@ Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape'
 # Chapter 1: Mathematical Preliminaries and Error Analysis
 - [ ] 1.1: Review of Calculus
 - [x] 1.2: Round-off Errors and Computer Arithmetic
-- [ ] 1.3: Algorithms and Convergence
+- [x] 1.3: Algorithms and Convergence
 - [ ] 1.4: Numerical Software
 
 # Chapter 2: Solutions of Equations in One Variable
