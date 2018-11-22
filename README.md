@@ -67,7 +67,7 @@ Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape'
 # Chapter 7: IterativeTechniques in Matrix Algebra
 - [x] 7.1 Norms of Vectors and Matrices
 - [x] 7.2 Eigenvalues and Eigenvectors
-- [ ] 7.3 The Jacobi and Gauss-Siedel Iterative Techniques
+- [x] 7.3 The Jacobi and Gauss-Siedel Iterative Techniques
 - [ ] 7.4 Relaxation Techniques for Solving Linear Systems
 - [ ] 7.5 Error Bounds and Iterative Refinement
 - [ ] 7.6 The Conjugate Gradient Method
