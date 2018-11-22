@@ -1,7 +1,9 @@
 \usepackage{hdr}
-\usepackage{amsmath,ntheorem,amssymb,xfrac,listings,xcolor,enumerate,booktabs,multirow}
+\usepackage{amsmath,ntheorem,amssymb,xfrac,listings,xcolor,enumerate,booktabs,multirow,graphicx}
 \usepackage[framemethod=tikz]{mdframed}
 \usetikzlibrary{shadows}
+% color
+\definecolor{青白}{RGB}{192,235,215}
 % \usepackage{showkeys}
 \newmdtheoremenv[%
     outerlinewidth  = 2,%
@@ -21,6 +23,24 @@
     splittopskip    = \topskip,%
     ntheorem        = true,%
     ]{theo}{定理}[section]
+\newmdtheoremenv[%
+    outerlinewidth  = 1,%
+    roundcorner     = 10pt,%
+    backgroundcolor = white!40,%
+    outerlinecolor  = blue!70!black,%
+    innertopmargin  = \topskip,%
+    splittopskip    = \topskip,%
+    ntheorem        = true,%
+    ]{lemma}{引理}[section]
+\newmdtheoremenv[%
+    outerlinewidth  = 2,%
+    roundcorner     = 10pt,%
+    backgroundcolor = 青白,%
+    outerlinecolor  = blue!70!black,%
+    innertopmargin  = \topskip,%
+    splittopskip    = \topskip,%
+    ntheorem        = true,%
+    ]{coro}{推论}[section]
 % proof
 \newenvironment{proof}{{\textbf{[Proof]}\quad}}{\hfill$\square$}
 % equation label
