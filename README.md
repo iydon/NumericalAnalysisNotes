@@ -69,7 +69,7 @@ Numerical Analysis Notes and Codes. XeLaTeX to compile. (option: '-shell-escape'
 - [x] 7.2 Eigenvalues and Eigenvectors
 - [x] 7.3 The Jacobi and Gauss-Siedel Iterative Techniques
 - [ ] 7.4 Relaxation Techniques for Solving Linear Systems
-- [ ] 7.5 Error Bounds and Iterative Refinement
+- [x] 7.5 Error Bounds and Iterative Refinement
 - [ ] 7.6 The Conjugate Gradient Method
 - [ ] 7.7 Survey of Methods and Software
 

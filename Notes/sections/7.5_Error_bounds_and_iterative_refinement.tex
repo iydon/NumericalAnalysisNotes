@@ -1,0 +1,38 @@
+\section{Error Bounds and Iterative Refinement}
+\begin{theo}
+Suppose that $\tilde{\bfx}$ is an approximation to the solution of $\bf Ax=b$. $\bfA$ is nonsingular matrix and $\bf r$ is the residual vector for $\tilde{\bfx}$(${\bf r=b-A}\tilde{\bfx}$). Then for any natural norm
+\[
+\norms{\bfx-\tilde{\bfx}} = \bf\norms{A^{-1}r} \leq \norms{r}\norms{A^{-1}}
+\]
+\end{theo}
+and if $\bfx\neq 0$ and $\bf b\neq 0$
+\[
+\frac{\norms{\bfx-\tilde{\bfx}}}{\norms{\bfx}}\leq\frac{\norms{\bfA}\norms{\bfA^{-1}}}{\norms{\bf b}}\norms{\bf r}\quad\text{with $\norms{\bf b}\leq\norms{\bfA}\norms{\bfx}$}
+\]
+
+\subsection{Condition Numbers}
+\begin{defn}[Condition Number]
+The condition number of the non-singular matrix $\bfA$ relative to a norm \norms{\cdot} is
+\[
+1\leq\norms{\bf I}\leq\norms{\bfA\bfA^{-1}}\leq\norms{\bfA}\norms{\bfA^{-1}}=K(\bfA).
+\]
+A matrix $\bfA$ is \emph{well-conditioned} if $K(\bfA)$ is close to 1, and is \emph{ill-conditioned} when $K(\bfA)$ is significantly greater than 1.
+\end{defn}
+
+\subsection[Iterative Refinement]{Iterative Refinement(迭代改善法)}
+设$\bf Ax=b$，其中$A\in\mathbb{R^{n\times n}}$为非奇异矩阵，且为病态方程组（但不过分病态）。当求得线性方程组的近似解$\bfx_1$，下面研究改善方程组近似解$\bfx_1$精度的方法。\par
+首先用选主元三角分解法实现分解计算
+\[
+\bf PA\doteq LU.
+\]
+
+计算剩余向量
+\[
+\bf r_1=b-Ax_1,
+\]
+求解$\bf Ad=r_1$，得到的解记为$\bf d_1$。然后改善
+\[
+\bf x_2=x_1+d_1.
+\]
+
+在实际计算中，由于有舍入误差，$\bfx_2$只是方程组的近似解，重复上述过程，就产生一系列近似解序列$\{\bfx_k\}$，有时可能得到比较好的近似。
