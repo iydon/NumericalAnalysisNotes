@@ -1,11 +1,11 @@
 function y = CG(A, b, x0, eps, judge, error_gen, max_loop)
     % Conjugate_gradient method for solving system of linear equations.
     % Modified from [GitHub](https://github.com/Cassie1995/Conjugate-gradient-method-).
-    if nargin<7, max_loop=1024;               end
-    if nargin<6, error_gen=@(x)x;             end
-    if nargin<5, judge=@(x)norm(x,inf);       end
-    if nargin<4, eps=1e-6;                    end
-    if nargin<3, x0=zeros(size(b));           end
+    if nargin<7, max_loop=1024;         end
+    if nargin<6, error_gen=@(x)x;       end
+    if nargin<5, judge=@(x)norm(x,inf); end
+    if nargin<4, eps=1e-6;              end
+    if nargin<3, x0=zeros(size(b));     end
     if isempty(max_loop),  max_loop=1024;         end
     if isempty(error_gen), error_gen=@(x)x;       end
     if isempty(judge),     judge=@(x)norm(x,inf); end
