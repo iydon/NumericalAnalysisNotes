@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time     : 2018/11/19 15:30
+# @Time     : 2018/11/25 14:27
 # @Author   : Iydon
-# @File     : course7.3.py
+# @File     : 7.3.py
 
 import numpy as np
 
@@ -50,28 +50,17 @@ def gauss_seidel(A, b, x0=None):
         x_ = np.matmul(-A_, x_) + b_
 
 
-A = np.matrix([[10.,-1,2,0],[-1,11,-1,3],[2,-1,10,-1],[0,3,-1,8]])
-b = np.matrix([[6.],[25],[-11],[15]])
-result = jacobi_method(A, b)
-t = 0
-for r in result:
-    print(t, r.T)
-    t += 1
-    if t > 10: break
-
-result = gauss_seidel(A, b)
-t = 0
-for r in result:
-    print(t, r.T)
-    t += 1
-    if t > 10: break
-
-A  = np.diag(2*np.ones(99),0) - np.diag(np.ones(98),-1) - np.diag(np.ones(98),1)
-A /= 10000
-b  = np.matrix( np.sin(np.linspace(1,99,99)*np.pi/100) ).T
-x0 = np.matrix( np.ones((99, 1)) )
-
+A  = np.matrix([[3.,-1,1],[3,6,2],[3,3,7]])
+b  = np.matrix([[1.],[0],[4]])
+x0 = np.matrix([[0.],[0],[0]])
 result = jacobi_method(A, b, x0)
+t = 0
+for r in result:
+    print(t, r.T)
+    t += 1
+    if t > 10: break
+
+result = gauss_seidel(A, b, x0)
 t = 0
 for r in result:
     print(t, r.T)

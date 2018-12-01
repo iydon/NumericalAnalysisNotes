@@ -3,18 +3,20 @@
 % Modified by Iydon @ 09:13-09:30 29/11/2018
 % Ax = b
 
-function x = GaussSeidel(A, b, x0, eps, judge, error_gen, max_loop)
+function x = GaussSeidel(A, b, x0, eps, judge, error_gen, max_loop, show_steps)
     % __init__
-    if nargin<7, max_loop=1024;         end
-    if nargin<6, error_gen=@(x)x;       end
-    if nargin<5, judge=@(x)norm(x,inf); end
-    if nargin<4, eps=1e-6;              end
-    if nargin<3, x0=zeros(size(b));     end
-    if isempty(max_loop),  max_loop=1024;         end
-    if isempty(error_gen), error_gen=@(x)x;       end
-    if isempty(judge),     judge=@(x)norm(x,inf); end
-    if isempty(eps),       eps=1e-6;              end
-    if isempty(x0),        x0=zeros(size(b));     end
+    if nargin<8, show_steps=false;          end
+    if nargin<7, max_loop=1024;             end
+    if nargin<6, error_gen=@(x)x;           end
+    if nargin<5, judge=@(x,y)norm(y-x,inf); end
+    if nargin<4, eps=1e-6;                  end
+    if nargin<3, x0=zeros(size(b));         end
+    if isempty(show_steps), show_steps=false;          end
+    if isempty(max_loop),   max_loop=1024;             end
+    if isempty(error_gen),  error_gen=@(x)x;           end
+    if isempty(judge),      judge=@(x,y)norm(y-x,inf); end
+    if isempty(eps),        eps=1e-6;                  end
+    if isempty(x0),         x0=zeros(size(b));         end
     % A and b are input matrix, err is the eps, NumOfIter is the
     % number of iterations
     % x is the output solution
@@ -29,8 +31,7 @@ function x = GaussSeidel(A, b, x0, eps, judge, error_gen, max_loop)
         error('The number of rows of A must be the same as that of b');
     end
 
-    counter = 1;     % actual number of iterations used
-    x0 = zeros(n,1); % we need a zero matrix to build in
+    counter = 0;     % actual number of iterations used
     x  = zeros(n,1); % initialise output matrix x
 
    % check for conditions of GaussSeidel, see if the matrix is strictly
@@ -39,7 +40,7 @@ function x = GaussSeidel(A, b, x0, eps, judge, error_gen, max_loop)
         s = 0;
         for j = 1:n
             if i ~= j 
-                s = s+abs(A(i,j));
+                s = s + abs(A(i,j));
             end
         end
         
@@ -48,11 +49,13 @@ function x = GaussSeidel(A, b, x0, eps, judge, error_gen, max_loop)
         % diagonally dominant matrix or a positive definite matrix
         if s < abs(A(i,j))
             fprintf('The conditions of Guass-Seidel have not met\nPlease use other methods to find solution matrix x\n');
-            return;
+            % return;
         end
     end
 
-    while counter < max_loop % loop ends when exceed max no. of iterations 
+    while counter <= max_loop % loop ends when exceed max no. of iterations
+        % display
+        if show_steps, disp([num2str(counter), ': ', num2str(x0')]); end 
         % Gauss-Seidel Iteration
         for i = 1:n
             I = [1:i-1 i+1:n];
@@ -60,14 +63,16 @@ function x = GaussSeidel(A, b, x0, eps, judge, error_gen, max_loop)
         end
         % calculate error and compare with eps entered
         % break if good enough
-        if judge(x-x0) < eps
+        err = judge(x0,x);
+        if err < eps
            break;
         end
         x0 = x;              % assign the new x to x0
         counter = counter+1; % no. of iterations
     end
 
-    disp(['The number of iterations is ', num2str(counter)]);
+    disp(['The number of iterations is ', num2str(counter-1)]);
+    disp(['Error: ', num2str(err)]);
     if counter >= max_loop
         fprintf('Maximum number of iterations has exceeded\n');
     end
