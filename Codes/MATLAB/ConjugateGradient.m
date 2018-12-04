@@ -74,6 +74,3 @@ function y = SOR(A, b, omega, x0, eps, judge, error_gen, max_loop, show_steps)
     disp(['The number of iterations is ', num2str(n)]);
     disp(['Error: ', num2str(judge(X,x0))]);
 end
-
-
-

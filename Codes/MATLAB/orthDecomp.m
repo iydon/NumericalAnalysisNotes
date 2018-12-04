@@ -100,16 +100,3 @@ classdef orthDecomp < handle
         end
     end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
