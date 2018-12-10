@@ -21,7 +21,7 @@ def n_point_differentiation(xs, fxs):
         return num / den
     result = 0
     for i in range(2*mid-1):
-    	result += fxs[i] * Lagrange(i)
+        result += fxs[i] * Lagrange(i)
     return result.diff()
 
 """

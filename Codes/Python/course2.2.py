@@ -75,11 +75,11 @@ def secant_method(f, start:list, max_step:int=32, eps:float=1e-6) -> float:
     p = [i    for i in start]
     q = [f(i) for i in start]
     for i in range(max_step):
-    	_p = p[-1] - q[-1]*(p[-1]-p[0])/(q[-1]-q[0])
-    	if abs(_p-p[-1])<eps:
-    		return (i, _p)
-    	p = [p[-1], _p]
-    	q = [q[-1], f(_p)]
+        _p = p[-1] - q[-1]*(p[-1]-p[0])/(q[-1]-q[0])
+        if abs(_p-p[-1])<eps:
+            return (i, _p)
+        p = [p[-1], _p]
+        q = [q[-1], f(_p)]
     return False
 
 
@@ -102,15 +102,15 @@ def false_position(f, start:list, max_step:int=32, eps:float=1e-6) -> float:
     p = [i    for i in start]
     q = [f(i) for i in start]
     for i in range(max_step):
-    	_p = p[-1] - q[-1]*(p[-1]-p[0])/(q[-1]-q[0])
-    	if abs(_p-p[-1]) < eps:
-    		return (i, _p)
-    	_q = f(_p)
-    	if _q*q[-1] < 0:
-    		p[0] = p[-1]
-    		q[0] = q[-1]
-    	p[-1] = _p
-    	q[-1] = _q
+        _p = p[-1] - q[-1]*(p[-1]-p[0])/(q[-1]-q[0])
+        if abs(_p-p[-1]) < eps:
+            return (i, _p)
+        _q = f(_p)
+        if _q*q[-1] < 0:
+            p[0] = p[-1]
+            q[0] = q[-1]
+        p[-1] = _p
+        q[-1] = _q
     return False
 
 
