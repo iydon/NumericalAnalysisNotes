@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time     : 2018/12/27 09:54
 # @Author   : Iydon
-# @File     : course8.1.py
+# @File     : course8.2.py
 
 import Poly
 import sympy as sp
